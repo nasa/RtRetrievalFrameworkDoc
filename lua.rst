@@ -16,7 +16,7 @@ It is worth noting that Lua uses 1-based indexing unlike the C++ code that is wr
 Organization
 ============
 
-There are many separate Lua files involved in a single execution of L2 FP. These files have been organized such that the files with more general functionality are extended by files which use more specific implementation details. One of the configuration Lua files typically extends another by using the Lua ``require`` statement and Lua's table inheritance.
+There are many separate Lua files involved in a single execution. These files have been organized such that the files with more general functionality are extended by files which use more specific implementation details. One of the configuration Lua files typically extends another by using the Lua ``require`` statement and Lua's table inheritance.
 
 The graph below shows the organizational hierarchy for the OCO configuration:
 
@@ -43,7 +43,7 @@ Config Common
 
 As the table above states, ``config_common.lua`` is collection of common routines that are not instrument specific. It defines ``ConfigCommon``, a table object which contains the configuration and also serves as a name space. The most important method is ``do_config``. It is called from the lowest level configuration file to begin the process of instantiating objects. 
 
-L2 FP framework objects are created through Lua ``Creator`` classes. These classes define how a particular functionality is instantiated. They also provide an initial guess value, objects to be added to the state vector and objects to be registered into the output file. The ``Creator`` class also handles calling any other ``Creator`` objects that it depends on.
+The framework objects are created through Lua ``Creator`` classes. These classes define how a particular functionality is instantiated. They also provide an initial guess value, objects to be added to the state vector and objects to be registered into the output file. The ``Creator`` class also handles calling any other ``Creator`` objects that it depends on.
 
 The hierarchy of ``Creator`` objects forms a tree which at the top is the one ``Creator`` that ``do_config`` knows about directly, the ``fm`` creator. All other ``Creator`` objects are dependencies of this one or other ``Creator`` objects. The graph below shows the organization of the ``Creator`` objects in the current OCO configuration.
 
@@ -105,7 +105,8 @@ An abbreviated portion of the table is duplicated below::
             creator = ConfigCommon.dispersion_polynomial,
             apriori = ConfigCommon.l1b_spectral_coefficient_i,
             covariance = OcoConfig.dispersion_covariance_i("Instrument/Dispersion"),
-            number_pixel = ConfigCommon.hdf_read_int_1d("Instrument/Dispersion/number_pixel"),
+            number_pixel = 
+                ConfigCommon.hdf_read_int_1d("Instrument/Dispersion/number_pixel"),
             retrieved = true,
             is_one_based = true,
          },
