@@ -1,0 +1,4 @@
+styles:
+    acronym-table:
+        parent: table
+        colWidths: [20%, 80%]
