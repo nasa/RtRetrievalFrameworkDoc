@@ -82,8 +82,6 @@ We can plot the solar model with a couple of short commands as follows::
 
 .. image:: images/wrappers-fig_1.png
    :align: center
-   :height: 300
-   :width: 400
 
 Example 2 - Forward model without Jacobian
 ------------------------------------------
@@ -115,8 +113,6 @@ Run just the radiative transfer w/o applying solar or instrument model::
 
 .. image:: images/wrappers-fig_2.png
    :align: center
-   :height: 300
-   :width: 400
 
 We can also run the RT with Jacobian not disabled and then plot up a portion of the spectral data (first dim) for all state vector types::
 
@@ -130,7 +126,6 @@ This shows that the Jacobian is dominated by one value:
 
 .. image:: images/wrappers-fig_5.png
    :align: center
-   :height: 400
 
 Look at vector and find largest one, and name of it::
 
@@ -147,8 +142,6 @@ To apply the solar model and the instrument model along with other effects we wo
 
 .. image:: images/wrappers-fig_4.png
    :align: center
-   :height: 300
-   :width: 400
 
 Example 6 - Use Generic Solver
 ------------------------------
@@ -292,18 +285,12 @@ Once we have this module, we can use this in ipython to generate simple plots::
 
 .. image:: images/wrappers-fig_6.png
    :align: center
-   :height: 300
-   :width: 400
 
 .. image:: images/wrappers-fig_7.png
    :align: center
-   :height: 300
-   :width: 400
 
 .. image:: images/wrappers-fig_8.png
    :align: center
-   :height: 300
-   :width: 400
 
 Python Callback
 ===============

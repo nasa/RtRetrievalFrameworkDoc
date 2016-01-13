@@ -47,7 +47,7 @@ As you use autotools more, you may want to consult the `Automake manual <http://
 Autotools Problems
 ------------------
 
-Autotools has been showing its age and haphazard design for some time (often referred to as "auto-hell" see for example `http://lwn.net/Articles/188693/ <http://lwn.net/Articles/188693/||class="linkification-ext" title="Linkification: http://lwn.net/Articles/188693/">`_), however right now there isn't an obvious replacement. Most FOSS project still use these tools, so for now we'll continue to do the same. KDE recently moved to CMake, but right now they are the only large project to use CMake.
+Autotools has been showing its age and haphazard design for some time (often referred to as "auto-hell" for example see: "`Why the KDE project switched to CMake <http://lwn.net/Articles/188693/>`_"), however right now there isn't an obvious replacement. Most FOSS project still use these tools, so for now we'll continue to do the same. KDE recently moved to CMake, but right now they are the only large project to use CMake.
 
 For a user, autotools stuff work fine, all of the complication is in writing the input files during development. Fortunately, Level 2 Physics isn't particularly complicated compared to other projects (like KDE), so for now this complication is manageable.
 

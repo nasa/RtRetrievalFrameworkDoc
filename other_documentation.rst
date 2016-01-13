@@ -7,12 +7,6 @@ ATBD
 
 The `OCO-2 algorithm theoretical document <http://disc.sci.gsfc.nasa.gov/OCO-2/documentation/oco-2-v6/OCO2_L2_ATBD.V6.pdf>`_ describes the algorithms in the RT Retrieval Framework used to retrieve the column-averaged CO2 dry air mole fraction XCO2 and other quantities included in the Level 2 (L2) Product from the spectra collected by the Orbiting Carbon Observatory-2 (OCO-2). It identifies sources of input data, describes the physical theory and mathematical background underlying the use of this information in the retrievals; includes implementation details; and summarizes the assumptions and limitations of the adopted approach.
 
-NASA Tech Brief
-===============
-
-A `NASA Tech Brief (NTR-49044) <http://www.techbriefs.com/component/content/article/ntb/tech-briefs/information-sciences/20330>`_ is available that gives a short overview of the RT Retrieval Software.
-
-
 Doxygen
 =======
 
