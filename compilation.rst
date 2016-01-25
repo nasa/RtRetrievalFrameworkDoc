@@ -13,22 +13,20 @@ There is some third party software included with the source code that need compi
 
     $ mkdir build_optimized
     $ cd build_optimized
-    $ /your/path/to/rtr_framework/configure THIRDPARTY=build
+    $ /path/to/source/configure THIRDPARTY=build
     $ make all
 
-In the above replace ``/your/path/to/rtr_framework`` with the location where you downloaded the software during the :doc:`setup` instructions.
+In the above replace ``/path/to/source`` with the location where you downloaded the software during the :doc:`setup` instructions.
 
 The ``configure`` command creates the Makefile to use. You only need to run this when you are creating a new build directory, after that you can just rerun ``make all`` to get any software updates. Configure will check a bunch of things on the system, and in the end print a report something like::
 
      Level 2 Full Physics is now configured
 
-      Installation directory:       /your/path/to/build_optimized/install
+      Installation directory:       /path/to/build_optimized/install
       Build debug version:          no
       Fortran compiler type:        ifort
-      Fortran compiler:             /opt/local/depot/intel/11.1/064/bin/intel64/ifort -g -xSSE2 -O3 -Difort -heap-arrays 1024
+      Fortran compiler:             ifort -g -xSSE2 -O3 -Difort -heap-arrays 1024
       C compiler:                   gcc -g -O2
-      LD Flags:                      -R /opt/local/depot/intel/11.1/064/lib/intel64:/opt/local/depot/intel/11.1/064/mkl/lib/em64t:/opt/local/depot/intel/11.1/064/lib/intel64:/opt/local/depot/intel/11.1/064/mkl/lib/em64t
-
       HDF5 support:                 yes
       Build own HDF5 library:       yes
       Build own LIDORT library:     yes
@@ -44,12 +42,12 @@ For serious development it is recommended to compile the third party software on
 
     $ mkdir build_third_party
     $ cd build_third_party
-    $ /your/path/to/rtr_framework/configure THIRDPARTY=build --prefix=/install/path/for/third_party
+    $ /path/to/source/configure THIRDPARTY=build --prefix=/path/for/third_party
     $ make thirdparty
 
 Now subsequent builds can use this directory instead of recompiling the third party packages::
 
-    $ /your/path/to/rtr_framework/configure THIRDPARTY=/install/path/for/third_party
+    $ /path/to/source/configure THIRDPARTY=/install/path/for/third_party
     $ make all
 
 Build Results
@@ -95,7 +93,8 @@ Debugging
 
 It has been discovered that gfortran works better with valgrind and debugging (although our "official" builds use ifort). The default gfortran on many systems is often too old, we use Fortran 2003 features that were not available until GCC version 4.5. To use a different gfortran version, you can use the following configure command::
 
-    $ /path/to/level_2/configure FC=gfortran-4.5 CC=gcc-4.5 CXX=g++-4.5 --enable-debug <other config options>
+    $ /path/to/source/configure FC=gfortran-4.5 CC=gcc-4.5 CXX=g++-4.5 \
+        --enable-debug <other config options>
 
 Developer Information
 =====================

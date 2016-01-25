@@ -213,17 +213,20 @@ Configuration
 
 The configuration is slightly tricky, if you want to have python working. The issue is that you need to use the same version of gcc and g+ used to create python, while at the same time using a different version of gfortran. The configuration used in development is::
 
-    $ ../Level2/configure \
-       FCLIBS="/opt/local/lib/gcc44/gcc/x86_64-apple-darwin10/4.4.5/libgfortranbegin.a /opt/local/lib/gcc44/libgfortran.dylib" \
-       FC=/opt/local/bin/gfortran-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \
-       --with-python-swig --with-lidort=build --with-cppad=build --with-blitz=build
+    $ .../configure \
+        FCLIBS="/opt/local/lib/gcc44/gcc/x86_64-apple-darwin10/4.4.5/libgfortranbegin.a \
+        /opt/local/lib/gcc44/libgfortran.dylib" \
+        FC=/opt/local/bin/gfortran-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \
+        --with-python-swig --with-lidort=build --with-cppad=build --with-blitz=build
 
 Note the "FCLIBS" - this is required. This works around splitting between different versions for g+ and gfortran. Without this, the python library will use the libstdc+ coming from g+-4.4, not the system one. This results in fairly obscure memory errors when std::string from one version of g is passed to a library expecting a different version.
 
 Note that the strict requirement on the compiler is only needed for building the python wrappers. If you don't care about the wrappers, you can leave off the FCLIBS and use the same version for gfortran and for g+ and gcc. For nonpython development, the configuration we used is::
 
-    $ ../Level2/configure THIRDPARTY=build FC=/opt/local/bin/gfortran-mp-4.4 CXX=/opt/local/bin/g++-mp-4.4 \
-        CC=/opt/local/bin/gcc-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 --enable-debug --enable-maintainer-mode
+    $ .../configure THIRDPARTY=build FC=/opt/local/bin/gfortran-mp-4.4 \
+        CXX=/opt/local/bin/g++-mp-4.4 \
+        CC=/opt/local/bin/gcc-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \
+        --enable-debug --enable-maintainer-mode
 
 In this case, we build all the thirdparty libraries rather than using the system versions, this is needed so that a consistent compiler is used for things link HDF5 and BOOST.
 
@@ -259,7 +262,7 @@ Install free Fortran compilers::
 
 Install Python packages::
 
-    $ fink install python26 numpy-py27 h5py-py27 matplotlib-py27 scipy-py27 ipython-py27
+    $ fink install python27 numpy-py27 h5py-py27 matplotlib-py27 scipy-py27 ipython-py27
 
 Since we are using the Fink unstable repository everything comes from source and the compilation which includes many dependencies can takes a fair amount of time.
 
