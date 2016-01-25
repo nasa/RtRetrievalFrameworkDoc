@@ -2,6 +2,9 @@
 RT Retrieval Framework
 ======================
 
+| Jet Propulsion Laboratory, California Institute of Technology. 
+| Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+
 This software `(NASA NTR-49044) <http://www.techbriefs.com/component/content/article/ntb/tech-briefs/information-sciences/20330>`_ retrieves a set of atmospheric/surface/instrument parameters from a simultaneous fit to spectra from multiple absorption bands. The software uses an iterative, non-linear retrieval technique (optimal estimation). After the retrieval process has converged, the software performs an error analysis. The products of the software include all quantities needed to understand the information content of the measurement, its uncertainty, and its dependence on interfering atmospheric properties.
 
 The software provides a flexible, efficient, and accurate tool to retrieve the atmospheric composition from near-infrared spectra. Its unique features are:

@@ -34,7 +34,9 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'RT Retrieval Framework'
-copyright = u'2015, JPL'
+title = u'Rt Retrieval Framework User\'s Guide Documentation'
+author = u'Jet Propulsion Laboratory, California Institute of Technology'
+copyright = u'Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -176,9 +178,9 @@ latex_elements = {
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
+sponsorship = author.replace(',', ',\\\\') + '.\\\\\n\\\\' + u'Copyright 2016 California Institute of Technology.\\\\U.S. Government sponsorship acknowledged'
 latex_documents = [
-  ('index', 'RtRetrievalFramework.tex', u'Rt Retrieval Framework User\'s Guide Documentation',
-   u'JPL', 'manual'),
+  ('index', 'RtRetrievalFramework.tex', title, sponsorship, 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -207,8 +209,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'rtretrievalframeworkusersguide', u'RT Retrieval Framework User\'s Guide Documentation',
-     [u'JPL'], 1)
+    ('index', project, title, [author], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -221,8 +222,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'RtRetrievalFramework', u'RT Retrieval Framework User\'s Guide Documentation',
-   u'JPL', 'RtRetrievalFramework', 'One line description of project.',
+  ('index', 'RtRetrievalFramework', title,
+   author, 'RtRetrievalFramework', copyright,
    'Miscellaneous'),
 ]
 
@@ -255,7 +256,7 @@ texinfo_documents = [
 # regardless of the global pdf_compressed setting.
 
 pdf_documents = [ 
-    ('index', u'RT Retrieval Framework', u'RT Retrieval Framework', u'JPL'),
+    ('index', project, title, author),
 ]
 
 # A comma-separated list of custom stylesheets. Example:
