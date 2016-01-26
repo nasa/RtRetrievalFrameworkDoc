@@ -162,6 +162,6 @@ doctest:
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
-#github: html
-#	ghp-import $(BUILDDIR)/html
-#	git push origin gh-pages
+github: html
+	ghp-import $(BUILDDIR)/html
+	git push public gh-pages
