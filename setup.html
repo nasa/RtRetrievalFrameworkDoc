@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Setup &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="System Configuraiton" href="system_configuration.html" />
+    <link rel="prev" title="RT Retrieval Framework" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">RT Retrieval Framework</a>
+        </li>
+        <li>
+          <a href="system_configuration.html" title="Next document">System Configuraiton</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
+<p>The following sections describe how to obtain and initialize the tools and source code needed to develop and utilize the resources available for running the RT Retrieval Framework code. These sections describe a recommended directory structure that can be changed by the user. Operators/developers should feel free to reorganize where they deploy the tools. The organization has been designed to not necessitate any one strict directory organization.</p>
+<div class="section" id="obtaining-the-code">
+<h2>Obtaining the Code<a class="headerlink" href="#obtaining-the-code" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://github.com/nasa/RtRetrievalFramework">public copy</a> of the source code can be obtained from Github.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> git clone https://github.com/nasa/RtRetrievalFramework.git
+</pre></div>
+</div>
+<p>This is a clone of the development repository used at JPL. On a regular basis we push our changes to the public repository from JPL.</p>
+</div>
+<div class="section" id="enviroment-setup">
+<h2>Enviroment Setup<a class="headerlink" href="#enviroment-setup" title="Permalink to this headline">¶</a></h2>
+<p>The downloaded directory contains a bash script that will include into your shell environment paths and variables needed by various tools contained therein. These scripts should be sourced in your bash startup script in order for these tools to be configured and ready to use each time you log in.</p>
+<p>Add the following to your .bashrc or wherever you place these things for yourself:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">source</span> /path/to/source/setup_env.sh
+</pre></div>
+</div>
+<p>This script is used when working on code developing. On the <a class="reference internal" href="compilation.html"><em>Compilation</em></a> page it will be discussed how to use the software as an installed program.</p>
+</div>
+<div class="section" id="development-environment-organization">
+<h2>Development Environment Organization<a class="headerlink" href="#development-environment-organization" title="Permalink to this headline">¶</a></h2>
+<p>The development environment checked out in the preceding section has the following important sub-directories:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>lib/</td>
+<td>Where most source code lives</td>
+</tr>
+<tr class="row-even"><td>input/</td>
+<td>Input files and Lua configuration</td>
+</tr>
+<tr class="row-odd"><td>support/</td>
+<td>Supporting utilities</td>
+</tr>
+<tr class="row-even"><td>tests/</td>
+<td>End-to-End tests</td>
+</tr>
+<tr class="row-odd"><td>unit_test_data/</td>
+<td>Inputs and expected results used by unit tests</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Setup</a><ul>
+<li><a class="reference internal" href="#obtaining-the-code">Obtaining the Code</a></li>
+<li><a class="reference internal" href="#enviroment-setup">Enviroment Setup</a></li>
+<li><a class="reference internal" href="#development-environment-organization">Development Environment Organization</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">RT Retrieval Framework</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="system_configuration.html"
+                        title="next chapter">System Configuraiton</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/setup.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">RT Retrieval Framework</a>
+        </li>
+        <li>
+          <a href="system_configuration.html" title="Next document">System Configuraiton</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

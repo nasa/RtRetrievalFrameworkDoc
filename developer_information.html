@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Developer’s Information &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="Other Documentation" href="other_documentation.html" />
+    <link rel="prev" title="Python Wrappers" href="python_wrappers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="python_wrappers.html" title="Previous document">Python Wrappers</a>
+        </li>
+        <li>
+          <a href="other_documentation.html" title="Next document">Other Documentation</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="developer-s-information">
+<h1>Developer&#8217;s Information<a class="headerlink" href="#developer-s-information" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The rest of the user&#8217;s guide is concerned with Level 2 from a user&#8217;s point of view, dealing with things like &#8220;How do a run the software&#8221; and &#8220;How do a I build it&#8221;. This document is concerned with Level 2 from a Developer&#8217;s point of view. It describes the overall software architecture, how to make changes to the system, etc.</p>
+</div>
+<div class="section" id="build-system">
+<h2>Build System<a class="headerlink" href="#build-system" title="Permalink to this headline">¶</a></h2>
+<p>We use the same build system used by many open source projects, the standard &#8220;configure/make&#8221; cycle used to build many linux packages. The details of actually building the software is covered in the <a class="reference internal" href="compilation.html"><em>compilation section</em></a>.</p>
+<p>We&#8217;ll give a little more detail in this section on using the build system from a developer&#8217;s point of view, e.g, &#8220;how do I add a file?&#8221;.</p>
+<div class="section" id="autotools">
+<h3>Autotools<a class="headerlink" href="#autotools" title="Permalink to this headline">¶</a></h3>
+<p>The system is built using the standard GNU autotools chain. If you are familiar with this, then this system is pretty standard. Things are set up as with most projects. Different projects seem to put local autoconf macros in different places, on this system they are in config/m4.</p>
+<p>If you are only vaguely familiar with autotools, it can be a bit confusing about what files we generate, and which are derived files.</p>
+<p>The file ./booststrap can be used to initial generate the derived files.</p>
+<p>The input files are configure.in and Makefile.am. From these files the ./configure and Makefile.in are generated. In addition to these file, there are local autoconf macros in config/m4, and derived files used by configure in the directory config. You can generally ignore these - you really need to know how to use autotools before you want to mess around with the autoconf macros (it isn&#8217;t hard, just a bit obscure).</p>
+<p>To make it manageable, Makefile.am is broken into a number of pieces that are included into the top level Makefile.am file. Each directory with code has its own .am file that describes the code in that directory, for instance exe/full_physics/full_physics.am.</p>
+<p>Once these files are generated, the actual build is done by ./configure and make cycle that should be familiar if you&#8217;ve installed any of the GNU software before. This generates an actual Makefile.</p>
+<p>The specific tools used for each piece:</p>
+<ul class="simple">
+<li>automake - most commonly used piece. This takes the various &#8221;.am&#8221; files and produces a Makefile.in file. This needs to be run whenever you change one of the automake files.</li>
+<li>autoconf - produces the &#8220;configure&#8221; file. This takes the macros and configure.in file and produces the configure file. Need to run this when configure.in has been changed.</li>
+<li>aclocal - collects all the local macros and prepares them for use with autoconf. Need to run this if you change any of the local &#8221;.m4&#8221; files.</li>
+<li>libtoolize - prepares libtool for use with automake. Only need to run this to update the version of libtool used.</li>
+</ul>
+<p>If can be easier to just run automake and the other tools by hand when needed, particularly if you only change something once in a while.</p>
+<p>However if you are going to regularly be modifying things (e.g., you are a developer), it can be convenient to enable &#8220;maintainer mode&#8221; in the Makefiles. This adds rules in the Makefile to rebuild the ./configure and Makefile.in files as needed. To turn this on, you add the option &#8220;&#8211;enable-maintainer-mode&#8221; when you do configure, e.g, &#8221;./configure &#8211;enable-maintainer-mode&#8221;.</p>
+<p>There is nothing magic about maintainer mode, it just runs automake and autoconf when input files have changed.</p>
+<p>As you use autotools more, you may want to consult the <a class="reference external" href="http://www.gnu.org/s/hello/manual/automake/Autotools-Introduction.html#Autotools-Introduction">Automake manual</a>. A very nice introduction to autotools is <a class="reference external" href="http://www.freesoftwaremagazine.com/books/autotools_a_guide_to_autoconf_automake_libtool">Autotools: a practitioner&#8217;s guide to Autoconf, Automake and Libtool</a>.</p>
+</div>
+<div class="section" id="autotools-problems">
+<h3>Autotools Problems<a class="headerlink" href="#autotools-problems" title="Permalink to this headline">¶</a></h3>
+<p>Autotools has been showing its age and haphazard design for some time (often referred to as &#8220;auto-hell&#8221; for example see: &#8220;<a class="reference external" href="http://lwn.net/Articles/188693/">Why the KDE project switched to CMake</a>&#8221;), however right now there isn&#8217;t an obvious replacement. Most FOSS project still use these tools, so for now we&#8217;ll continue to do the same. KDE recently moved to CMake, but right now they are the only large project to use CMake.</p>
+<p>For a user, autotools stuff work fine, all of the complication is in writing the input files during development. Fortunately, Level 2 Physics isn&#8217;t particularly complicated compared to other projects (like KDE), so for now this complication is manageable.</p>
+<p>In the future, if there is a clear replacement for autotools, we may want to move this system to that.</p>
+</div>
+<div class="section" id="adding-new-code">
+<h3>Adding New Code<a class="headerlink" href="#adding-new-code" title="Permalink to this headline">¶</a></h3>
+<p>There are two steps to adding new code:</p>
+<ol class="arabic simple">
+<li>Update the corresponding &#8221;.am&#8221; file</li>
+<li>Run automake (either by hand or automatically if you did &#8220;&#8211;enable-maintainer-mode&#8221;</li>
+</ol>
+<p>The easiest way to add code is to open one of the existing &#8221;.am&#8221; files such as &#8220;implementation.am&#8221; and copy what is done there. Code is added by adding to make variables. There are typically 4 files associated with a new piece of code (one or more may be missing, in which case you just leave them off)</p>
+<ul class="simple">
+<li>The header file (&#8221;.h&#8221;) gets added to &#8220;fullphysicsinc_HEADERS&#8221;.</li>
+<li>The source file (&#8221;.cc&#8221;, &#8221;.F90&#8221;) get added to &#8220;libfp_la_SOURCES&#8221;.</li>
+<li>The SWIG interface file (&#8221;.i&#8221;) gets added to &#8220;SWIG_SOURCES&#8221;.</li>
+<li>The unit test file (&#8220;_test.cc&#8221;) get added to &#8220;lib_test_all_SOURCES&#8221;.</li>
+</ul>
+<p>After added the code, run automake to regenerate the Makefile.in</p>
+</div>
+</div>
+<div class="section" id="platform-information">
+<h2>Platform Information<a class="headerlink" href="#platform-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
+<p>The Mac does not put debugging information into an executable when you build it. Instead, there is a separate step using the &#8220;dsymutil&#8221; program. So if you want to debug l2_fp or test_all you need to first run dsymutil to get debugging information into it.</p>
+</div>
+</div>
+<div class="section" id="design-information">
+<h2>Design Information<a class="headerlink" href="#design-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unit-classes">
+<h3>Unit classes<a class="headerlink" href="#unit-classes" title="Permalink to this headline">¶</a></h3>
+<p>We track physical units in our code (e.g., a velocity may be marked as &#8220;m/s&#8221;). This handles conversions when needed (e.g., add 10 m/s to 15 km/hr), and detects error with units that don&#8217;t match (e.g., add 5 m to 3 hr).</p>
+<p>The unit tracking is handled by the class &#8220;Unit&#8221;. Two closely related classes are DoubleWithUnit and the template ArrayWithUnit&lt;T, D&gt;. These two classes contain units along with a double or blitz::Array&lt;T, D&gt;.</p>
+<img alt="_images/UnitDiagram.png" src="_images/UnitDiagram.png" />
+<p>The class Unit does dimensional analysis. We track the power of each of the SI base units.   In order, these are meter, kilogram, second, Kelvin, Ampere, mole, candela, steradian, radian, photon</p>
+<p>Note that steradian and radian are actually dimensionless, but it is useful to track them. Also photon is a photon count, which doesn&#8217;t really have units either. But it is useful to track because we can determine the photon count at a particular wavelength to convert to cm^-1.</p>
+<p>The units have a &#8220;name&#8221; associated with them. This is a free form string. The intent is this represents the units is a human readable form. We need to have this attached rather than automatically generated because depending on the context  we may represent the units in different manners. For example, the radiance units are usually given as &#8220;W / m^2 / sr / cm^-1&#8221;. This is exactly the same as &#8220;0.01 kg * m / s^3 / sr&#8221;, but the latter would be a fairly confusing way to label the radiance.  There is no real way to have a program know how we want the unit represented as a string, so the easiest thing to do is to just attach it.</p>
+<p>Note there is no problem going the other way. Given a string, we can uniquely parse it to give a Unit object. This is supported by the unit constructor, which can take strings such as &#8220;m/s&#8221; or &#8220;W / m^s / sr / cm^-1&#8221;.</p>
+<p>We can combine units using the operation &#8220;*&#8221;, &#8220;/&#8221; and &#8220;pow&#8217;. These handle the dimensional analysis, and creates a basic name. The name is generated by simple combination rules, but you may want to override the generated name with a preferred string. So for example kg * m / s * s can be called &#8220;N&#8221; for Newton.</p>
+<p>The DoubleWithUnit and ArrayWithUnit can be combined with the normal math operations of *, /, +, and -. You can also convert to a new set of units using &#8220;convert&#8221;.</p>
+</div>
+<div class="section" id="compile-vs-runtime-classes">
+<h3>Compile vs. Runtime classes<a class="headerlink" href="#compile-vs-runtime-classes" title="Permalink to this headline">¶</a></h3>
+<p>The Unit class described in the previous section has the feature that the units are determined at run time. There is another class of unit libraries such as boost::units where the determination is at compile time. This is one of those classic design trade offs.</p>
+<p>The compile time unit classes have the significant advantage that the units are determined at compile time. There is <strong>no</strong> runtime cost, everything is determined at compile time. All unit errors are also determined at compile time. However, it has the disadvantage that you need to know what the units are at compile time.</p>
+<p>In our case, the overhead of the units class is minimal. We are pretty much insensitive to time overhead except in the innermost wavenumber/wavelength loop in the forward model. All of our unit calculations are outside of this loop, so the minor overhead in run time is acceptable. We want to be able to determine the units at run time, so for example OCO has wavelength given in microns while GOSAT has wavenumber given in cm^-1. Which kind of processing we are doing is determined at run time by the contents of the Lua configuration file.</p>
+</div>
+<div class="section" id="instrument">
+<h3>Instrument<a class="headerlink" href="#instrument" title="Permalink to this headline">¶</a></h3>
+<p>The Instrument class is used by the ForwardModel to model the measurement instrument. This class takes the radiance values calculated on the high resolution spectral grid (using the RadiativeTransfer and SolarModel classes), and produces a low resolution spectral grid of radiance values. This data is what our instrument model would have seen if it was to observe the high resolution spectral grid.</p>
+<p>Any object of the Instrument class can be used, this just needs to supply one major function &#8220;apply_instrument_model&#8221;. There are two variations of this function, one that only processes the radiance data and one that also processes the Jacobian of the radiance data with respect to the StateVector.</p>
+<img alt="_images/InstrumentDiag2.png" src="_images/InstrumentDiag2.png" />
+<p>If you are implementing a new instrument, you just need to match the interface specified by Instrument. However, in practice your we have a instrument model as described in the OCO ATB. To implement this, we divide the different pieces of the instrument calculation into different pieces, as described in the next section.</p>
+<div class="section" id="ilsinstrument">
+<h4>IlsInstrument<a class="headerlink" href="#ilsinstrument" title="Permalink to this headline">¶</a></h4>
+<p>The particular implementation we use in our code is described in the following diagram:</p>
+<img alt="_images/IlsInstrument.png" src="_images/IlsInstrument.png" />
+<p>We divide the calculation into two major pieces. The modeling of the Instrument Line Shape (ILS) is done by the Ils class. There is one object for each spectral band. In principle we could use different models of of the ILS, and indeed a different model for each band. But in practice, we always do a convolution, using the IlsConvolution class.  We then apply zero or more instrument corrections. This is where we do things like a zero offset correction or a continuum correction.</p>
+</div>
+<div class="section" id="ils">
+<h4>Ils<a class="headerlink" href="#ils" title="Permalink to this headline">¶</a></h4>
+<p>The Ils class is responsible for doing modeling the Instrument Line Shape. There is one main function that needs to be implements &#8220;apply_ils&#8221;. This has two variations, with and without also calculation the Jacobian.</p>
+<p>You can use any object of the Ils class, but in practice we have one implementation we use IlsConvolution. This divides the calculation into three pieces. The dispersion calculation is done by a Dispersion object, this determines the wavenumbers for each of the instrument pixels we will be calculating. The IlsFunction determines the values we will be convolving with for a particular pixel And the IlsConvolution class actually convolves the high resolution spectra with the IlsFunction to get the low resolution instrument spectra.</p>
+</div>
+<div class="section" id="instrumentcorrection">
+<h4>InstrumentCorrection<a class="headerlink" href="#instrumentcorrection" title="Permalink to this headline">¶</a></h4>
+<p>After the ILS is done, zero or more instrument corrections can be applied. There is just one major function that needs to be supplied, &#8220;apply_correction&#8221;. This has two flavors, with and without Jacobian calculations.</p>
+</div>
+<div class="section" id="dispersion">
+<h4>Dispersion<a class="headerlink" href="#dispersion" title="Permalink to this headline">¶</a></h4>
+<p>The Dispersion object determines the wavenumber of each instrument pixel. It supplies one function, &#8220;pixel_wavenumber&#8221;.</p>
+</div>
+<div class="section" id="ilsfunction">
+<h4>IlsFunction<a class="headerlink" href="#ilsfunction" title="Permalink to this headline">¶</a></h4>
+<p>The IlsFunction object supplies one function, &#8220;ils&#8221;.</p>
+</div>
+</div>
+<div class="section" id="lua-config">
+<h3>Lua Config<a class="headerlink" href="#lua-config" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Introduction<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>We generate our configuration files in Lua. Lua is a simple language that integrates well with C/C++, and is ideal for things like configuration files.We use the package Luabind for wrapping our C++ code for use in the configuration files.</p>
+<p>Documenation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.lua.org/docs.html">Lua documentation</a></li>
+<li><a class="reference external" href="http://lua-users.org/wiki/LuaDirectory">Lua Wiki</a></li>
+<li><a class="reference external" href="http://www.rasterbar.com/products/luabind/docs.htm">Luabind</a></li>
+<li>We have stashed copies of the Lua and Luabind manuals in the source tree under doc. If you are off the web, or there is a problem with one of these web sites you can consult the documentation there.</li>
+</ul>
+</div>
+<div class="section" id="lua-for-the-impatient">
+<h4>Lua For the Impatient<a class="headerlink" href="#lua-for-the-impatient" title="Permalink to this headline">¶</a></h4>
+<p>You should consult the documentation for details, but Lua is a very simple language (which is why we selected it). If you have used any procedural/OO language you should be able to pick up the syntax quickly. A few things to note:</p>
+<ol class="arabic simple">
+<li>Comments start with &#8220;&#8211;&#8221; and go to the end of the line (like C++ &#8220;//&#8221;).</li>
+<li>Classes are slightly different in Lua. It doesn&#8217;t directly support them, but supports &#8220;Tables&#8221; where are fairly similar. Like python, all function that you would think of as object oriented take &#8220;self&#8221; as the first argument. You can call a function on a class using the standard &#8221;.&#8221;, but if you do that you need to explicitly pass the object is, so &#8220;foo.func(foo, arg1, arg2)&#8221;. As a special notation, you can instead use &#8221;:&#8221; which automatically adds the object as the first argument, so &#8220;foo.func(foo,arg1, arg2)&#8221; is exactly the same as &#8220;foo:func(arg1, arg2)&#8221;. By convention, you should use the second form.</li>
+</ol>
+</div>
+<div class="section" id="wrapping-c-code">
+<h4>Wrapping C++ code<a class="headerlink" href="#wrapping-c-code" title="Permalink to this headline">¶</a></h4>
+<p>To create classes in Lua, we need to be able to call C++ code. The connection between Lua and C++ is handled by the Luabind library. This is a template based library that automatically generates the glue code between the two languages.</p>
+<p>The registration of the C++ code is handled by the RegisterLua class.</p>
+<p>One approach to this is to have a central function that registers everything, and as we add classes update that central function. An alternative is the one selected here, were we have a more decentralized registration. Classes set up the registration in their own area, and then simple get listed and needing registration in the file &#8220;register_lua.cc&#8221;.  It would be nice to decentralize this completely, but I could never figure out a way to actually do this.</p>
+<p>So registration involves 2 steps:</p>
+<ol class="arabic simple">
+<li>Add the registration code to the class code (e.g., for Foo, this is the file &#8220;foo.cc&#8221;).</li>
+<li>Add the class to the list of classes in the function RegisterLua::register_lua found at &#8220;lib/Lua/register_lua.cc&#8221;</li>
+</ol>
+<p>The registration code is cookie cutter, so we have macros to help do this. The registration is different depending on if we have a derived class with a base class, or a class that doesn&#8217;t derive from another (or at least one that we want to tell Lua about).</p>
+<p>An example of this in level_1b.cc:</p>
+<div class="highlight-python"><div class="highlight"><pre>#ifdef HAVE_LUA
+   #include &quot;register_lua.h&quot;
+   REGISTER_LUA_CLASS(Level1b)
+   REGISTER_LUA_END()
+#endif
+</pre></div>
+</div>
+<p>In level_1b_hdf.cc:</p>
+<div class="highlight-python"><div class="highlight"><pre>#ifdef HAVE_LUA
+   #include &quot;register_lua.h&quot;
+   REGISTER_LUA_DERIVED_CLASS(Level1bAcos, Level1b)
+     .def(luabind::constructor&lt;std::string, std::string&gt;())
+   REGISTER_LUA_END()
+#endif
+</pre></div>
+</div>
+<p>Then in register_lua.cc, we add:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">REGISTER_LUA_LIST</span><span class="p">(</span><span class="n">Level1b</span><span class="p">);</span>
+<span class="n">REGISTER_LUA_LIST</span><span class="p">(</span><span class="n">Level1Hdf</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that you don&#8217;t need to put all the member functions into the Lua registration, just the ones you want to call in Lua. For many classes, this will just be the constructors. We use Lua configuration files for creating the objects needed in Level 2 Full physics, not to do major computation with it. That is more what we do with the Python wrappers. Lua is a small language that is ideal for integration in the C++ code, but it is no replacement for Python, nor is it meant to be.</p>
+<p>Pretty much all our classes are Printable. We&#8217;ve put the magic incantation in place for classes in the macros (this ties the Lua
+function __tostring__ to the C++ code print_to_string). If you have a class that is not printable, we&#8217;ll need to add a macro to support that.</p>
+<p>We normally use Lua through our C++ code. It can be useful, particularly when testing, to go the other way. We define the function &#8220;luaopen_fullphysics&#8221; to go the other way, call in Lua like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">require</span><span class="p">(</span><span class="s">&quot;libfull_physics&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that you should use the installed library, like we do with python (i.e., do a &#8220;make install&#8221;).</p>
+<p>You will need to make sure that the library is on the PATH. Lua uses an odd syntax for its path, an example of using it would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>LUA_CPATH=install/lib/?.so lua
+require &quot;libfull_physics&quot;
+l1b = Level1bAcos(&quot;filename&quot;,&quot;soundingid&quot;)
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-configuration-files">
+<h4>Writing Configuration Files<a class="headerlink" href="#writing-configuration-files" title="Permalink to this headline">¶</a></h4>
+<p>The configuration file purposely have very minimum requirements. To use in Level 2 full physics, you just need to create a handful of global variables however you would like. These variables are listed in the config.lua file found in input/gosat/config/config.lua. This includes things like &#8220;forward_model&#8221; and &#8220;solver&#8221;.</p>
+<p>However, most of the time you will want to use a &#8220;standard&#8221; run with possibly some local modifications. The &#8220;standard&#8221; run uses a nested set of files:</p>
+<ul class="simple">
+<li>config_common.lua - General purpose routines for creating Level 2 objects</li>
+<li>base_config.lua - The &#8220;standard&#8221; way of building things</li>
+<li>dynamic_config.lua - Things that change from one run to the next, but in a systematic way (e.g, sounding_id, surface_type)</li>
+<li>config.lua - The local config file. In the simplest case, just include dynamic_config.lua without change. But can contain local modifications.</li>
+</ul>
+<p>It turns out that constructing objects tends to follow the same pattern for the many kinds of Level 2 objects we create. We have introduce a &#8220;Creator&#8221; Lua class (<em>not</em> Level 2 C++ class), along with a few derived classes to handle common scenarios. The UML diagram of this code:</p>
+<img alt="_images/LuaConfigurationFile.png" src="_images/LuaConfigurationFile.png" />
+</div>
+<div class="section" id="debugging-configuration-files">
+<h4>Debugging Configuration Files<a class="headerlink" href="#debugging-configuration-files" title="Permalink to this headline">¶</a></h4>
+<p>Because the configuration files are actual Lua code, you can get errors in the file.</p>
+<p>If a Lua error occurs, you can optionally turn on diagnostic messages by setting the diagnostic flag to true in the Lua file. This will print some tracing messages, which will help you locate the portion of the Lua where an error occurs.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Developer&#8217;s Information</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#build-system">Build System</a><ul>
+<li><a class="reference internal" href="#autotools">Autotools</a></li>
+<li><a class="reference internal" href="#autotools-problems">Autotools Problems</a></li>
+<li><a class="reference internal" href="#adding-new-code">Adding New Code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#platform-information">Platform Information</a><ul>
+<li><a class="reference internal" href="#mac">Mac</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#design-information">Design Information</a><ul>
+<li><a class="reference internal" href="#unit-classes">Unit classes</a></li>
+<li><a class="reference internal" href="#compile-vs-runtime-classes">Compile vs. Runtime classes</a></li>
+<li><a class="reference internal" href="#instrument">Instrument</a><ul>
+<li><a class="reference internal" href="#ilsinstrument">IlsInstrument</a></li>
+<li><a class="reference internal" href="#ils">Ils</a></li>
+<li><a class="reference internal" href="#instrumentcorrection">InstrumentCorrection</a></li>
+<li><a class="reference internal" href="#dispersion">Dispersion</a></li>
+<li><a class="reference internal" href="#ilsfunction">IlsFunction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lua-config">Lua Config</a><ul>
+<li><a class="reference internal" href="#id1">Introduction</a></li>
+<li><a class="reference internal" href="#lua-for-the-impatient">Lua For the Impatient</a></li>
+<li><a class="reference internal" href="#wrapping-c-code">Wrapping C++ code</a></li>
+<li><a class="reference internal" href="#writing-configuration-files">Writing Configuration Files</a></li>
+<li><a class="reference internal" href="#debugging-configuration-files">Debugging Configuration Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="python_wrappers.html"
+                        title="previous chapter">Python Wrappers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="other_documentation.html"
+                        title="next chapter">Other Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/developer_information.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="python_wrappers.html" title="Previous document">Python Wrappers</a>
+        </li>
+        <li>
+          <a href="other_documentation.html" title="Next document">Other Documentation</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

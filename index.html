@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>RT Retrieval Framework &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="#" />
+    <link rel="next" title="Setup" href="setup.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="# ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          <a href="setup.html" title="Next document">Setup</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="#">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rt-retrieval-framework">
+<h1>RT Retrieval Framework<a class="headerlink" href="#rt-retrieval-framework" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Jet Propulsion Laboratory, California Institute of Technology.</div>
+<div class="line">Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.</div>
+</div>
+<p>This software <a class="reference external" href="http://www.techbriefs.com/component/content/article/ntb/tech-briefs/information-sciences/20330">(NASA NTR-49044)</a> retrieves a set of atmospheric/surface/instrument parameters from a simultaneous fit to spectra from multiple absorption bands. The software uses an iterative, non-linear retrieval technique (optimal estimation). After the retrieval process has converged, the software performs an error analysis. The products of the software include all quantities needed to understand the information content of the measurement, its uncertainty, and its dependence on interfering atmospheric properties.</p>
+<p>The software provides a flexible, efficient, and accurate tool to retrieve the atmospheric composition from near-infrared spectra. Its unique features are:</p>
+<ul class="simple">
+<li>Spectra from ground-based or space-based measurement with arbitrary observation geometry can be analyzed.</li>
+<li>The retrieved parameters can be chosen from a large set of atmospheric (e.g., volume mixing ratio of gases or aerosol optical depth), surface (e.g., Lambertian reflection), and instrument (e.g., spectral shift or instrument line shape parameters) parameters.</li>
+<li>The software uses an accurate, state-of-the-art, multiple-scattering radiative transfer code combined with an efficient polarization approximation to simulate measured spectra.</li>
+<li>The software enables fast and highly accurate simulations of broad spectral ranges by an optional parallelization of the frequency processing in the radiative transfer model.</li>
+</ul>
+<div class="toctree-wrapper compound" id="table-of-contents">
+<p class="caption"><span class="caption-text">Table of Contents</span><a class="headerlink" href="#table-of-contents" title="Permalink to this toctree">¶</a></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#obtaining-the-code">Obtaining the Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#enviroment-setup">Enviroment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#development-environment-organization">Development Environment Organization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system_configuration.html">System Configuraiton</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="system_configuration.html#memory-requirements">Memory Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_configuration.html#python-requirements">Python Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_configuration.html#fortran-compilers">Fortran Compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_configuration.html#linux-system-setup">Linux System Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_configuration.html#os-x-system-setup">OS X System Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="compilation.html">Compilation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#building">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#build-results">Build Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#using-other-compilers">Using Other Compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#build-options">Build Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#debugging">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#developer-information">Developer Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#unit-testing">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#unit-testing-variables">Unit Testing Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#end-to-end-test">End-to-End Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lua.html">Lua Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lua.html#indexing">Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lua.html#organization">Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lua.html#config-common">Config Common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lua.html#base-config">Base Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lua.html#config-lua">config.lua</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lua.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrappers.html">Python Wrappers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_wrappers.html#building">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_wrappers.html#running">Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_wrappers.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_wrappers.html#python-callback">Python Callback</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer_information.html">Developer&#8217;s Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_information.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_information.html#build-system">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_information.html#platform-information">Platform Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_information.html#design-information">Design Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="other_documentation.html">Other Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="other_documentation.html#atbd">ATBD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other_documentation.html#doxygen">Doxygen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other_documentation.html#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acronyms.html">Acronyms</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="setup.html"
+                        title="next chapter">Setup</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          <a href="setup.html" title="Next document">Setup</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="#">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

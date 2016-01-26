@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Other Documentation &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="Acronyms" href="acronyms.html" />
+    <link rel="prev" title="Developer’s Information" href="developer_information.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="developer_information.html" title="Previous document">Developer&#8217;s Information</a>
+        </li>
+        <li>
+          <a href="acronyms.html" title="Next document">Acronyms</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="other-documentation">
+<h1>Other Documentation<a class="headerlink" href="#other-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="atbd">
+<h2>ATBD<a class="headerlink" href="#atbd" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="http://disc.sci.gsfc.nasa.gov/OCO-2/documentation/oco-2-v6/OCO2_L2_ATBD.V6.pdf">OCO-2 algorithm theoretical document</a> describes the algorithms in the RT Retrieval Framework used to retrieve the column-averaged CO2 dry air mole fraction XCO2 and other quantities included in the Level 2 (L2) Product from the spectra collected by the Orbiting Carbon Observatory-2 (OCO-2). It identifies sources of input data, describes the physical theory and mathematical background underlying the use of this information in the retrievals; includes implementation details; and summarizes the assumptions and limitations of the adopted approach.</p>
+</div>
+<div class="section" id="doxygen">
+<h2>Doxygen<a class="headerlink" href="#doxygen" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> documentation can be created from the build directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ make doxygen-run
+</pre></div>
+</div>
+<p>The resulting documentation will be available in the <code class="docutils literal"><span class="pre">doc/html</span></code> subdirectory.</p>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> Python documentation can be built along with the Python bindings:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ /path/to/rtr_framework/configure --with-python-swig --with-documentation
+$ make install
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">--with-documentation</span></code> creates the Sphinx files along with the code compilation. The resulting files will be in the <code class="docutils literal"><span class="pre">install/share/doc/full_physics/html</span></code> subdirectories.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Other Documentation</a><ul>
+<li><a class="reference internal" href="#atbd">ATBD</a></li>
+<li><a class="reference internal" href="#doxygen">Doxygen</a></li>
+<li><a class="reference internal" href="#python">Python</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="developer_information.html"
+                        title="previous chapter">Developer&#8217;s Information</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acronyms.html"
+                        title="next chapter">Acronyms</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/other_documentation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="developer_information.html" title="Previous document">Developer&#8217;s Information</a>
+        </li>
+        <li>
+          <a href="acronyms.html" title="Next document">Acronyms</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

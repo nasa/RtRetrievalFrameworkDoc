@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Compilation &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="System Configuraiton" href="system_configuration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="system_configuration.html" title="Previous document">System Configuraiton</a>
+        </li>
+        <li>
+          <a href="testing.html" title="Next document">Testing</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="compilation">
+<h1>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h1>
+<p>The RT Retrieval Framework uses the standard autotools used by many open source software. While you can build the software in the same directory that you have the source, it is suggested that you use a separate build directory. This allows you to do different builds from the same source, e.g. an optimized and debug version.</p>
+<div class="section" id="building">
+<h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
+<p>There is some third party software included with the source code that need compiling along with our code. To build the framework&#8217;s code along with the third party software, execute the following:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> mkdir build_optimized
+<span class="gp">$</span> <span class="nb">cd </span>build_optimized
+<span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build
+<span class="gp">$</span> make all
+</pre></div>
+</div>
+<p>In the above replace <code class="docutils literal"><span class="pre">/path/to/source</span></code> with the location where you downloaded the software during the <a class="reference internal" href="setup.html"><em>Setup</em></a> instructions.</p>
+<p>The <code class="docutils literal"><span class="pre">configure</span></code> command creates the Makefile to use. You only need to run this when you are creating a new build directory, after that you can just rerun <code class="docutils literal"><span class="pre">make</span> <span class="pre">all</span></code> to get any software updates. Configure will check a bunch of things on the system, and in the end print a report something like:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">Level 2 Full Physics is now configured</span>
+
+<span class="go"> Installation directory:       /path/to/build_optimized/install</span>
+<span class="go"> Build debug version:          no</span>
+<span class="go"> Fortran compiler type:        ifort</span>
+<span class="go"> Fortran compiler:             ifort -g -xSSE2 -O3 -Difort -heap-arrays 1024</span>
+<span class="go"> C compiler:                   gcc -g -O2</span>
+<span class="go"> HDF5 support:                 yes</span>
+<span class="go"> Build own HDF5 library:       yes</span>
+<span class="go"> Build own LIDORT library:     yes</span>
+<span class="go"> Install documentation:        no</span>
+</pre></div>
+</div>
+<p>If you are building from within your source checkout you can just use the following script included with the source:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> ./nonjpl_build.script
+</pre></div>
+</div>
+<p>In order to run all of the unit tests, you&#8217;ll also need to have a copy of the ABSCO (Absoprtion Coefficient) tables. These files must be obtained separately from JPL.</p>
+<p>For serious development it is recommended to compile the third party software once and then refer to it in subsequent builds:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> mkdir build_third_party
+<span class="gp">$</span> <span class="nb">cd </span>build_third_party
+<span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build --prefix<span class="o">=</span>/path/for/third_party
+<span class="gp">$</span> make thirdparty
+</pre></div>
+</div>
+<p>Now subsequent builds can use this directory instead of recompiling the third party packages:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>/install/path/for/third_party
+<span class="gp">$</span> make all
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-results">
+<h2>Build Results<a class="headerlink" href="#build-results" title="Permalink to this headline">¶</a></h2>
+<p>The executable is <code class="docutils literal"><span class="pre">l2_fp</span></code>, and will be placed in the top of the build directory.</p>
+<p>Another useful target is <code class="docutils literal"><span class="pre">install</span></code>, which will build <code class="docutils literal"><span class="pre">l2_fp</span></code> and copy it and all associated libraries to a separate install directory. The default directory used is <code class="docutils literal"><span class="pre">./install</span></code> unless you specify an alternative to <code class="docutils literal"><span class="pre">configure</span></code>. This is primarily of use for production to put the executable files in a separate location. For a developer, you generally don&#8217;t need to do this step.</p>
+</div>
+<div class="section" id="using-other-compilers">
+<h2>Using Other Compilers<a class="headerlink" href="#using-other-compilers" title="Permalink to this headline">¶</a></h2>
+<p>The configure script will search for one of the supported compilers &#8211; ifort, f90, f95, gfortran, g95, pathf90, pgf90 - in that order.</p>
+<p>Note that we only test with the Intel compiler &#8220;ifort&#8221; and &#8220;gfortran&#8221;. We require a fairly new version of ifort (&gt;= 11.1) and gfortran (&gt;= 4.5).</p>
+<p>If you want to use a different compiler than what configure automatically selects, you can specify it on the configure line as <code class="docutils literal"><span class="pre">FC=&lt;compiler&gt;</span></code>, e.g., <code class="docutils literal"><span class="pre">FC=f90</span></code>.</p>
+<p>The thirdparty version of HDF-5 can only be built using ifort or gfortran. Other compilers will likely build if you don&#8217;t try to build hdf5 (i.e., you don&#8217;t have <code class="docutils literal"><span class="pre">--with-hdf5=build</span></code>).</p>
+</div>
+<div class="section" id="build-options">
+<h2>Build Options<a class="headerlink" href="#build-options" title="Permalink to this headline">¶</a></h2>
+<p>The third party libraries can be selectively compiled by specifying configure options such as <code class="docutils literal"><span class="pre">--with-hdf5=build</span></code>, or <code class="docutils literal"><span class="pre">--with-lidort=build</span></code>. This will build your own version of these libraries. This is particularly useful if you are actually modifying, for instance the LIDORT code (e.g., a bug fix), but still want to refer to a prebuilt directory of third party software. The full list of third party libraries can be seen by running configure with the <code class="docutils literal"><span class="pre">--help</span></code> option.</p>
+<p>There are a few other options that can be passed to configure:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#8211;help</td>
+<td>Print out all the options for configure</td>
+</tr>
+<tr class="row-odd"><td>&#8211;enable-debug</td>
+<td>Build a version of l2_fp for debugging, rather than an optimized version</td>
+</tr>
+<tr class="row-even"><td>&#8211;enable-maintainer-mode</td>
+<td>Automatically update configure, Makefile.in. Useful if you are editing the various &#8221;.am&#8221; files</td>
+</tr>
+<tr class="row-odd"><td>&#8211;with-absco=&lt;dir&gt;</td>
+<td>Specify location of ABSCO data used by unit tests</td>
+</tr>
+<tr class="row-even"><td>&#8211;prefix=&lt;dir&gt;</td>
+<td>Specify directory to install to</td>
+</tr>
+<tr class="row-odd"><td>FC=&lt;compiler&gt;</td>
+<td>Specify a compiler to use</td>
+</tr>
+<tr class="row-even"><td>THIRDPARTY=build</td>
+<td>Build a local copy of all the third party libraries</td>
+</tr>
+<tr class="row-odd"><td>THIRDPARTY=&lt;dir&gt;</td>
+<td>Search in &lt;dir&gt; in addition to the normal locations for third party libraries</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>It has been discovered that gfortran works better with valgrind and debugging (although our &#8220;official&#8221; builds use ifort). The default gfortran on many systems is often too old, we use Fortran 2003 features that were not available until GCC version 4.5. To use a different gfortran version, you can use the following configure command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> /path/to/source/configure <span class="nv">FC</span><span class="o">=</span>gfortran-4.5 <span class="nv">CC</span><span class="o">=</span>gcc-4.5 <span class="nv">CXX</span><span class="o">=</span>g++-4.5 <span class="se">\</span>
+<span class="go">    --enable-debug &lt;other config options&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="developer-information">
+<h2>Developer Information<a class="headerlink" href="#developer-information" title="Permalink to this headline">¶</a></h2>
+<p>For developers who need to understand autotools in more detail, an nice introduction is found at <a class="reference external" href="http://www.freesoftwaremagazine.com/books/autotools_a_guide_to_autoconf_automake_libtool">Autotools: a practitioner&#8217;s guide to Autoconf, Automake and Libtool</a>, and detailed reference can be found at <a class="reference external" href="http://sources.redhat.com/autobook/autobook/autobook_toc.html">Autobook</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Compilation</a><ul>
+<li><a class="reference internal" href="#building">Building</a></li>
+<li><a class="reference internal" href="#build-results">Build Results</a></li>
+<li><a class="reference internal" href="#using-other-compilers">Using Other Compilers</a></li>
+<li><a class="reference internal" href="#build-options">Build Options</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#developer-information">Developer Information</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="system_configuration.html"
+                        title="previous chapter">System Configuraiton</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="next chapter">Testing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/compilation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="system_configuration.html" title="Previous document">System Configuraiton</a>
+        </li>
+        <li>
+          <a href="testing.html" title="Next document">Testing</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

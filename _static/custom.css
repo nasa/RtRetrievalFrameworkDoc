@@ -1,0 +1,9 @@
+/* Use more of the browser window */
+header#pageheader, footer#pagefooter, div.related, div.document {
+    max-width: calc(100% - 3rem);
+}
+
+/* Use margins of parent element for paragraphs inside of list */
+li p {
+    margin: inherit;
+}

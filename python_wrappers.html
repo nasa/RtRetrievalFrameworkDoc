@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python Wrappers &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="Developer’s Information" href="developer_information.html" />
+    <link rel="prev" title="Lua Configuration" href="lua.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="lua.html" title="Previous document">Lua Configuration</a>
+        </li>
+        <li>
+          <a href="developer_information.html" title="Next document">Developer&#8217;s Information</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-wrappers">
+<h1>Python Wrappers<a class="headerlink" href="#python-wrappers" title="Permalink to this headline">¶</a></h1>
+<p>We have wrappers that allow the C+ Full Physics library to be used in Python.</p>
+<p>The exact same doxygen documentation is available in Python using the standard Python help system, in particular you can issue a command such as <code class="docutils literal"><span class="pre">help(AtmosphereOco)</span></code>.</p>
+<p>Check the Python documentation generated using doxygen for information what classes are available through Python.</p>
+<p>The wrappers are straight Python, but for interactive purposes use <a class="reference external" href="http://ipython.org/">IPython</a>, as well as the matplotlib and scipy libraries. If you aren&#8217;t familiar when them, you can take a look at their <a class="reference external" href="http://www.scipy.org/Getting_Started">getting started guide</a>.</p>
+<div class="section" id="building">
+<h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
+<p>The Python bindings are not built by default, you need to explicitly request that the bindings be compiled. This is done by adding an option to the configuration line:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> /path/to/source/configure --with-python-swig
+</pre></div>
+</div>
+<p>You need to do a full install, not just a <code class="docutils literal"><span class="pre">make</span> <span class="pre">all</span></code>. This is because Python needs to see the libraries in a particular directory structure that gets created with the install. So you would build with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make all <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>After building, you need to make sure that the Python path is set to point to the installed library. You can do this using the setup script installed in the install area:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">source</span> ./install/setup_fp_env.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>First you will need to load the correct environmental variables then load a Python shell:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">source</span> ./install/setup_fp_env.sh
+<span class="gp">$</span> ipython --matplotlib auto
+</pre></div>
+</div>
+<p>The easiest way to get started is by using a pre-existing Lua configuration:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">full_physics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">matplotlib.pylab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">In [3]: </span><span class="n">conf</span> <span class="o">=</span> <span class="n">L2FpConfigurationLua</span><span class="p">(</span><span class="s">&#39;/path/to/existing_run/config.lua&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Add some information about getting the right enviromental variables made available.</strong></p>
+<div class="section" id="example-1-plotting-solar-spectrum">
+<h3>Example 1 - Plotting Solar Spectrum<a class="headerlink" href="#example-1-plotting-solar-spectrum" title="Permalink to this headline">¶</a></h3>
+<p>Get help on what conf is and can do:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="n">help</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you are using IPython, you can just use a <code class="docutils literal"><span class="pre">?</span></code> after the object to get help:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="n">conf</span><span class="err">?</span>
+</pre></div>
+</div>
+<p>The solar model object is one of several spectrum effects, arbitrary operators on spectrum before instrument effects have been processed. It will probably be at index 0 of the spectrum effects list. Get help on what solar model is and can do:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">help</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">speceff_val</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The second index above is the band index. Note that this is pretty much the same documentation as found in the <a class="reference external" href="http://nephthys.jpl.nasa.gov/~buildbot/doxygen/index.html">Doxygen Documentation</a>, or the <a class="reference external" href="http://nephthys.jpl.nasa.gov/~buildbot/python/index.html">Python Documentation</a> but it can be convenient to do this in IPython without going to a browser.</p>
+<p>We can plot the solar model with a couple of short commands as follows:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">In [6]: </span><span class="n">spec_dom</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">pixel_spectral_domain</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
+<span class="gp">In [7]: </span><span class="n">solar_spec</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">speceff_val</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span><span class="o">.</span><span class="n">solar_spectrum</span><span class="p">(</span><span class="n">spec_dom</span><span class="p">)</span>
+<span class="gp">In [8]: </span><span class="n">plot</span><span class="p">(</span><span class="n">solar_spec</span><span class="o">.</span><span class="n">wavenumber</span><span class="p">,</span> <span class="n">solar_spec</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/wrappers-fig_1.png" class="align-center" src="_images/wrappers-fig_1.png" />
+</div>
+<div class="section" id="example-2-forward-model-without-jacobian">
+<h3>Example 2 - Forward model without Jacobian<a class="headerlink" href="#example-2-forward-model-without-jacobian" title="Permalink to this headline">¶</a></h3>
+<p>Run forward model and get radiances only for all the bands:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiance_all</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The boolean argument to <code class="docutils literal"><span class="pre">radiance_all</span></code> tells the code to skip Jacobian calculations.</p>
+</div>
+<div class="section" id="example-3-forward-model-with-jacobian">
+<h3>Example 3 - Forward model with Jacobian<a class="headerlink" href="#example-3-forward-model-with-jacobian" title="Permalink to this headline">¶</a></h3>
+<p>Run forward model and get radiance and Jacobian (takes longer to run):</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [10]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiance_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-4-radiative-transfer">
+<h3>Example 4 - Radiative Transfer<a class="headerlink" href="#example-4-radiative-transfer" title="Permalink to this headline">¶</a></h3>
+<p>Run just the radiative transfer w/o applying solar or instrument model:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">In [12]: </span><span class="n">ils_hw</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ils_half_width</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
+<span class="gp">In [13]: </span><span class="n">spec_pix</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">pixel_spectral_domain</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
+<span class="gp">In [14]: </span><span class="n">spec_samp</span> <span class="o">=</span> \
+<span class="go">    conf.forward_model.spectrum_sampling.spectral_domain(band, spec_pix, ils_hw)</span>
+<span class="gp">In [15]: </span><span class="n">rrt</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiative_transfer</span><span class="o">.</span><span class="n">reflectance</span><span class="p">(</span><span class="n">spec_samp</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [16]: </span><span class="n">plot</span><span class="p">(</span><span class="n">rrt</span><span class="o">.</span><span class="n">spectral_domain</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rrt</span><span class="o">.</span><span class="n">spectral_range</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/wrappers-fig_2.png" class="align-center" src="_images/wrappers-fig_2.png" />
+<p>We can also run the RT with Jacobian not disabled and then plot up a portion of the spectral data (first dim) for all state vector types:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">rrt</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiative_transfer</span><span class="o">.</span><span class="n">reflectance</span><span class="p">(</span><span class="n">spec_samp</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span>
+<span class="gp">In [18]: </span><span class="n">jac</span> <span class="o">=</span> <span class="n">rrt</span><span class="o">.</span><span class="n">spectral_range</span><span class="o">.</span><span class="n">data_ad</span><span class="o">.</span><span class="n">jacobian</span>
+<span class="gp">In [19]: </span><span class="n">matshow</span><span class="p">(</span><span class="n">jac</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">)</span>
+<span class="gp">In [20]: </span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;State Index&quot;</span><span class="p">)</span>
+<span class="gp">In [21]: </span><span class="n">ylabel</span><span class="p">(</span><span class="s">&quot;Spectral Point&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This shows that the Jacobian is dominated by one value:</p>
+<img alt="_images/wrappers-fig_5.png" class="align-center" src="_images/wrappers-fig_5.png" />
+<p>Look at vector and find largest one, and name of it:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">state_vector</span><span class="o">.</span><span class="n">state_vector_name</span><span class="p">[</span><span class="n">argmax</span><span class="p">(</span><span class="n">jac</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])]</span>
+<span class="gr">Out[22]: </span><span class="s">&#39;Ground Lambertian A-Band Albedo Parm 2&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-5-apply-solar-and-instrument-models">
+<h3>Example 5 - Apply Solar and Instrument Models<a class="headerlink" href="#example-5-apply-solar-and-instrument-models" title="Permalink to this headline">¶</a></h3>
+<p>To apply the solar model and the instrument model along with other effects we would use the RT spectrum from the last example:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [26]: </span><span class="n">rinst</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">apply_spectrum_corrections</span><span class="p">(</span><span class="n">rrt</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="n">plot</span><span class="p">(</span><span class="n">rinst</span><span class="o">.</span><span class="n">spectral_domain</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rinst</span><span class="o">.</span><span class="n">spectral_range</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/wrappers-fig_4.png" class="align-center" src="_images/wrappers-fig_4.png" />
+</div>
+<div class="section" id="example-6-use-generic-solver">
+<h3>Example 6 - Use Generic Solver<a class="headerlink" href="#example-6-use-generic-solver" title="Permalink to this headline">¶</a></h3>
+<p><strong>DEPRECATED</strong></p>
+<p>Python SciPy comes with some generic solvers, including one based on the standard Fortran minpack routines. We have a version of the cost function that uses the more standard format of embedding the a priori values, a priori covariance matrix, and radiance uncertainty:</p>
+<p>As an example of using this:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="go">import scipy.optimize</span>
+
+<span class="go">cost_func = FmStandardFormatCostFunction(conf.forward_model(), \</span>
+<span class="go">        conf.spectral_window_apply().radiance(), \</span>
+<span class="go">        conf.spectral_window_apply().radiance_uncertainty(), \</span>
+<span class="go">        conf.initial_guess().apriori(), \</span>
+<span class="go">        conf.initial_guess().apriori_covariance())</span>
+
+<span class="go">x = conf.initial_guess().initial_guess()</span>
+<span class="go">cf = lambda x: cost_func.residual(x)</span>
+<span class="go">jf = lambda x: cost_func.jacobian(x)</span>
+<span class="go">yinitial = cf(conf.initial_guess().initial_guess())</span>
+<span class="go">print &quot;Initial chisq: %f&quot; % (sum(yinitial * yinitial)/ yinitial.size)</span>
+<span class="go">xsol, ier = scipy.optimize.leastsq(cf, x, Dfun=jf, maxfev=10)</span>
+
+<span class="go">if(ier &lt; 0):</span>
+<span class="go">    print &quot;An error occured&quot;</span>
+
+<span class="go">ysol = cf(xsol)</span>
+<span class="go">print &quot;Final chisq: %f&quot; % (sum(ysol * ysol)/ ysol.size)</span>
+</pre></div>
+</div>
+<p>This print out:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="go">Initial chisq: 131.571840</span>
+<span class="go">Final chisq: 18.775889</span>
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> This example only allows 10 evaluations of the cost function, and uses the default stopping criteria. This is really meant as a quick example, rather than saying this is a particularly good solver. Also, for C+ we were thinking of investigating the GSL. The GSL has python wrappers (<a class="reference external" href="http://pygsl.sourceforge.net/">PyGSL</a>), and can be used as an alternative to the scipy solver. The standard Level 2 Full Physics solver gets a chisq of 0.614842 in 5 evaluations, so this example obviously needs some tuning to work for real.</p>
+</div>
+<div class="section" id="more-advanced-example">
+<h3>More Advanced Example<a class="headerlink" href="#more-advanced-example" title="Permalink to this headline">¶</a></h3>
+<p><strong>DEPRECATED</strong></p>
+<p>The C+ interface exposed to Python has an interface centered around running the full physics retrieval. As we get feedback, we can extend this interface to be more useful in an investigative ipython environment. But you can also add your own layer of functionality on top of the lower level C+ interface, either as a quick prototype of a C+ interface change or instead of changing the C++.</p>
+<p>As a concrete example, the interface to the radiative transfer holds things like the solar zenith angle, number of streams, etc. fixed since these don&#8217;t vary in the Level 2 Retrieval. But a very useful investigation would be to vary these parameters and see how they affect the Radiative Transfer results.</p>
+<p>The ConfigurationHeritage interface in the earlier examples are tied to a particular run configuration file. But there is no reason that you need to create objects strictly from the run file, you can also use the more generic constructors of various classes, or modify objects after they have been created.</p>
+<p>Continuing our example, here a wrapper class that sets up Lidort, the LRad polarization correction, and a model atmosphere based on the configuration file. You can then vary parameters such as the surface pressure, solar zenith angle, and number of streams. This example does not include the LSI speed up (since this example looks at a single wavelength), but you could include that is you wanted to for some reason.</p>
+<p>We create a new class &#8220;RtExtraKnobs&#8221;. Save this in the file &#8220;rt_extra_knobs.py&#8221;. Note while you are developing code like this, you can repeatedly load updated versions by using the ipython &#8220;%run&#8221; command (once it is complete, you can just import it like any other module).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">full_physics</span> <span class="kn">as</span> <span class="nn">fp</span>
+
+<span class="k">class</span> <span class="nc">RtExtraKnobs</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s">&quot;/groups/algorithm/python_tryout/sample_run/oco_l2.run&quot;</span><span class="p">):</span>
+         <span class="n">conf</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">ConfigurationHeritage</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">atm</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">atmosphere</span><span class="p">()</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">state_vector</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">state_vector</span><span class="p">()</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">level_1b</span><span class="p">()</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c"># Return radiance for single point for given solar zenith, pressure,</span>
+    <span class="c"># and number of streams</span>
+    <span class="k">def</span> <span class="nf">radiance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wn</span><span class="p">,</span> <span class="n">sza</span><span class="p">,</span> <span class="n">surface_press</span><span class="p">,</span> <span class="n">nstream</span><span class="p">):</span>
+         <span class="k">try</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">atm</span><span class="o">.</span><span class="n">pressure</span><span class="p">()</span><span class="o">.</span><span class="n">surface_pressure</span><span class="p">(</span><span class="n">surface_press</span><span class="p">)</span>
+             <span class="n">rt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rt</span><span class="p">(</span><span class="n">sza</span><span class="p">,</span> <span class="n">nstream</span><span class="p">)</span>
+             <span class="c"># Don&#39;t need log message for processing one point</span>
+             <span class="n">fp</span><span class="o">.</span><span class="n">FpLogger</span><span class="o">.</span><span class="n">turn_off_logger</span><span class="p">()</span>
+             <span class="k">return</span> <span class="n">rt</span><span class="o">.</span><span class="n">radiance</span><span class="p">([</span><span class="n">wn</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">band</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+         <span class="k">finally</span><span class="p">:</span>
+             <span class="c"># Turn back on</span>
+             <span class="n">fp</span><span class="o">.</span><span class="n">FpLogger</span><span class="o">.</span><span class="n">turn_on_logger</span><span class="p">()</span>
+
+    <span class="c"># The relative azimuth needs to be modified because the convention used</span>
+    <span class="c"># in the OCO L1B1 file to to take both the solar and observation angles</span>
+    <span class="c"># as viewed from an observer standing in the FOV. LIDORT on the other</span>
+    <span class="c"># hand has the &quot;follow the photons&quot; convention. This results in a 180</span>
+    <span class="c"># degree change</span>
+    <span class="k">def</span> <span class="nf">__rel_azm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">band</span><span class="p">):</span>
+         <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">180</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">sounding_azimuth</span><span class="p">(</span><span class="n">band</span><span class="p">))</span> <span class="o">-</span> \
+             <span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">solar_azimuth</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">360</span><span class="p">):</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">360</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">360</span>
+         <span class="k">return</span> <span class="n">r</span>
+
+    <span class="c"># Get RT for a particular solar zenith angle and number of streams</span>
+    <span class="k">def</span> <span class="nf">__rt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solar_zenith</span><span class="p">,</span> <span class="n">number_stream</span><span class="p">):</span>
+         <span class="n">band</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">band</span>
+         <span class="c"># Hardcode these for this example</span>
+         <span class="n">nbrdf_quadratures</span> <span class="o">=</span> <span class="mi">50</span>
+         <span class="n">nstoke</span> <span class="o">=</span> <span class="mi">3</span>
+         <span class="n">ss_corr</span> <span class="o">=</span> <span class="bp">True</span>
+         <span class="n">delta_m_scaling</span> <span class="o">=</span> <span class="bp">True</span>
+         <span class="n">uplooking</span> <span class="o">=</span> <span class="bp">False</span>
+         <span class="c"># Value needed to be true for LRad</span>
+         <span class="n">get_rad_dif</span> <span class="o">=</span> <span class="bp">True</span>
+         <span class="n">nmom</span> <span class="o">=</span> <span class="n">number_stream</span> <span class="k">if</span><span class="p">(</span><span class="n">number_stream</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="k">else</span> <span class="mi">4</span>
+         <span class="n">rt_lidort</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">LidortDriver</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_vector</span><span class="p">,</span>
+                                         <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">stokes_coefficient</span><span class="p">(</span><span class="n">band</span><span class="p">)],</span>
+                                         <span class="p">[</span><span class="n">solar_zenith</span><span class="p">],</span>
+                                         <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">sounding_zenith</span><span class="p">(</span><span class="n">band</span><span class="p">)],</span>
+                                         <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__rel_azm</span><span class="p">(</span><span class="n">band</span><span class="p">)],</span>
+                                         <span class="n">number_stream</span><span class="p">,</span> <span class="n">nmom</span><span class="p">,</span> <span class="n">nbrdf_quadratures</span><span class="p">,</span>
+                                         <span class="n">nstoke</span><span class="p">,</span> <span class="n">get_rad_dif</span><span class="p">,</span> <span class="n">ss_corr</span><span class="p">,</span>
+                                         <span class="n">delta_m_scaling</span><span class="p">,</span> <span class="n">uplooking</span><span class="p">)</span>
+         <span class="n">rt_lrad</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">LRadDriver</span><span class="p">(</span><span class="n">rt_lidort</span><span class="p">,</span> <span class="p">[</span><span class="n">solar_zenith</span><span class="p">],</span>
+                                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">sounding_zenith</span><span class="p">(</span><span class="n">band</span><span class="p">)],</span>
+                                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__rel_azm</span><span class="p">(</span><span class="n">band</span><span class="p">)])</span>
+         <span class="k">return</span> <span class="n">rt_lrad</span>
+</pre></div>
+</div>
+<p>Once we have this module, we can use this in ipython to generate simple plots:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="go">from rt_extra_knobs import *</span>
+<span class="go">rt = RtExtraKnobs()</span>
+<span class="go">wn = 13005.0</span>
+<span class="go">sza = 74.0</span>
+<span class="go">psurf = 96716.0</span>
+<span class="go">nstream = 16</span>
+
+<span class="go">rad_by_sza = lambda x: rt.radiance(wn,x,psurf, nstream)</span>
+<span class="go">rad_by_psurf = lambda x: rt.radiance(wn,sza,x, nstream)</span>
+<span class="go">rad_by_nstream = lambda n: rt.radiance(wn,sza,psurf, int(n))</span>
+
+<span class="go">nstream_arr = r_[4:32]</span>
+<span class="go">plot(nstream_arr, map(rad_by_nstream, nstream_arr))</span>
+<span class="go">pylab.xlabel(&quot;Number streams&quot;)</span>
+<span class="go">sza_arr = r_[0:90:5]</span>
+<span class="go">plot(sza_arr, map(rad_by_sza, sza_arr))</span>
+<span class="go">pylab.xlabel(&quot;Solar Zenith Angle&quot;)</span>
+<span class="go">psurf_arr = r_[90000:100000:100j]</span>
+<span class="go">plot(psurf_arr, map(rad_by_psurf, psurf_arr))</span>
+<span class="go">pylab.xlabel(&quot;Surface Pressure&quot;)</span>
+</pre></div>
+</div>
+<img alt="_images/wrappers-fig_6.png" class="align-center" src="_images/wrappers-fig_6.png" />
+<img alt="_images/wrappers-fig_7.png" class="align-center" src="_images/wrappers-fig_7.png" />
+<img alt="_images/wrappers-fig_8.png" class="align-center" src="_images/wrappers-fig_8.png" />
+</div>
+</div>
+<div class="section" id="python-callback">
+<h2>Python Callback<a class="headerlink" href="#python-callback" title="Permalink to this headline">¶</a></h2>
+<p>To be documented - providing Python classes to be used in place of C+ (e.g., prototype a new LSI or solar model and test in retrieval).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python Wrappers</a><ul>
+<li><a class="reference internal" href="#building">Building</a></li>
+<li><a class="reference internal" href="#running">Running</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#example-1-plotting-solar-spectrum">Example 1 - Plotting Solar Spectrum</a></li>
+<li><a class="reference internal" href="#example-2-forward-model-without-jacobian">Example 2 - Forward model without Jacobian</a></li>
+<li><a class="reference internal" href="#example-3-forward-model-with-jacobian">Example 3 - Forward model with Jacobian</a></li>
+<li><a class="reference internal" href="#example-4-radiative-transfer">Example 4 - Radiative Transfer</a></li>
+<li><a class="reference internal" href="#example-5-apply-solar-and-instrument-models">Example 5 - Apply Solar and Instrument Models</a></li>
+<li><a class="reference internal" href="#example-6-use-generic-solver">Example 6 - Use Generic Solver</a></li>
+<li><a class="reference internal" href="#more-advanced-example">More Advanced Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-callback">Python Callback</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lua.html"
+                        title="previous chapter">Lua Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="developer_information.html"
+                        title="next chapter">Developer&#8217;s Information</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/python_wrappers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="lua.html" title="Previous document">Lua Configuration</a>
+        </li>
+        <li>
+          <a href="developer_information.html" title="Next document">Developer&#8217;s Information</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

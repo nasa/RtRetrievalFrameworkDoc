@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="Lua Configuration" href="lua.html" />
+    <link rel="prev" title="Compilation" href="compilation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="compilation.html" title="Previous document">Compilation</a>
+        </li>
+        <li>
+          <a href="lua.html" title="Next document">Lua Configuration</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unit-testing">
+<h2>Unit Testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h2>
+<p>There are two kinds of tests available. The first is unit testing. These test individual pieces of the system. The focus of this testing is on the software itself: did it build correctly, are the individual classes calculating what we expect them to.</p>
+<p>The unit tests are fully automated. You can run them with the following command from a build directory:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make check
+</pre></div>
+</div>
+<p>This runs through all the unit tests that don&#8217;t take a long time to run, and in the end says if the tests are successful or not (i.e., there is no analysis on your part, the test either succeeds or it doesn&#8217;t).</p>
+<p>When running the unit tests, it can be useful to work in a debug build. This means the configuration used the <code class="docutils literal"><span class="pre">--enable-debug</span></code> flag. This runs slower, but it adds additional checks such as range checking in both the C+ and Fortran arrays.</p>
+<p>The target <code class="docutils literal"><span class="pre">fast_check</span></code> works just like <code class="docutils literal"><span class="pre">check</span></code> except it does not build any of the executables. You will not catch any problems introduced into the build of the top level executables. This test target is faster and used in instances where one is developing a class and only running unit tests. The target <code class="docutils literal"><span class="pre">check</span></code> should still be run after the major work on a class has been completed.</p>
+<p>A longer, more complete set of tests can be run using the command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make long_check
+</pre></div>
+</div>
+<p>This runs all the tests that <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code> does, plus additional tests that take longer to run. For an optimized build (without the <code class="docutils literal"><span class="pre">--enable-debug</span></code> flag in the configuration), this takes a few minutes to run. A debug version takes longer to run, but still runs in under an hour.</p>
+<p>Just like with <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code>, the long checks print out if the tests are successful or not.</p>
+<p>Support exists for specifying specific unit tests to run. For instance so you can do:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make fast_check <span class="nv">run_test</span><span class="o">=</span>lidort_driver/*
+</pre></div>
+</div>
+<p>The command above will run just the lsi_rt unit tests. This feature passes the string through to the <code class="docutils literal"><span class="pre">--run_test</span></code> argument of the Boost unit tests, so consult the <a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/libs/test/doc/html/utf/user-guide/runtime-config/run-by-name.html">Boost documentation</a> to see what can be specified.</p>
+<p>This method does not catch breakage to any other classes, running the full suite should still be done occasionally to make sure everything is working.</p>
+</div>
+<div class="section" id="unit-testing-variables">
+<h2>Unit Testing Variables<a class="headerlink" href="#unit-testing-variables" title="Permalink to this headline">¶</a></h2>
+<p>The ABSCO tables are needed for certain unit tests. Once you have a copy of the ABSCO table files you can specify the location of these files when doing the initial configuration by specifying <code class="docutils literal"><span class="pre">--with-absco=&lt;dir&gt;</span></code>. You can also override the default on the make command line used for testing, for example:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make fast_check <span class="nv">run_test</span><span class="o">=</span>lidort_driver/* <span class="nv">abscodir</span><span class="o">=</span>/path/to/my/copy/absco
+</pre></div>
+</div>
+</div>
+<div class="section" id="end-to-end-test">
+<h2>End-to-End Test<a class="headerlink" href="#end-to-end-test" title="Permalink to this headline">¶</a></h2>
+<p>A build target <code class="docutils literal"><span class="pre">run_tests</span></code> exists which runs l2_fp for several tests (unless it hasn&#8217;t changed since the last run), and then compares the results against expected results, printing out the differences.  Individual tests are run by specifying the build name with the suffix <code class="docutils literal"><span class="pre">_run</span></code>. The tests names can be seen by looking at the subdirectories under the <code class="docutils literal"><span class="pre">tests/</span></code> directory of the source code.</p>
+<p>For example, to run all tests, in your build directory run:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make run_tests
+</pre></div>
+</div>
+<p>To test only a OCO-2 test case use the following target:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make oco2_sounding_1_run
+</pre></div>
+</div>
+<p>Or, to test only a GOSAT case use the following:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make tccon_sounding_1_run
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing</a><ul>
+<li><a class="reference internal" href="#unit-testing">Unit Testing</a></li>
+<li><a class="reference internal" href="#unit-testing-variables">Unit Testing Variables</a></li>
+<li><a class="reference internal" href="#end-to-end-test">End-to-End Test</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="compilation.html"
+                        title="previous chapter">Compilation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lua.html"
+                        title="next chapter">Lua Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/testing.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="compilation.html" title="Previous document">Compilation</a>
+        </li>
+        <li>
+          <a href="lua.html" title="Next document">Lua Configuration</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.4
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>
