@@ -25,8 +25,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
-    <link rel="next" title="Python Wrappers" href="python_wrappers.html" />
-    <link rel="prev" title="Testing" href="testing.html" />
+    <link rel="next" title="Running Jobs" href="running_jobs.html" />
+    <link rel="prev" title="Runs Setup" href="runs_setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   </head>
@@ -39,10 +39,10 @@
     <ul>
         <li>
           &larr;
-          <a href="testing.html" title="Previous document">Testing</a>
+          <a href="runs_setup.html" title="Previous document">Runs Setup</a>
         </li>
         <li>
-          <a href="python_wrappers.html" title="Next document">Python Wrappers</a>
+          <a href="running_jobs.html" title="Next document">Running Jobs</a>
           &rarr;
         </li>
     </ul>
@@ -151,7 +151,7 @@
 <h2>Base Config<a class="headerlink" href="#base-config" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">oco_config.lua</span></code> extends the <code class="docutils literal"><span class="pre">ConfigCommon</span></code> object with <code class="docutils literal"><span class="pre">OcoConfig</span></code> by adding additional <code class="docutils literal"><span class="pre">Creator</span></code> classes and functions. <code class="docutils literal"><span class="pre">oco_base_config.lua</span></code> extends <code class="docutils literal"><span class="pre">OcoConfig</span></code> and declares which <code class="docutils literal"><span class="pre">Creator</span></code> classes are used. It defines the <code class="docutils literal"><span class="pre">fm</span></code> table with nested tables for dependent <code class="docutils literal"><span class="pre">Creator</span></code> classes. Each <code class="docutils literal"><span class="pre">Creator</span></code> block contains a required <code class="docutils literal"><span class="pre">creator</span></code> attributes defining the class to use. Additional attributes can be declared in the block for use by the <code class="docutils literal"><span class="pre">Creator</span></code> object.</p>
 <p>An abbreviated portion of the table is duplicated below:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">fm</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">fm</span> <span class="o">=</span> <span class="p">{</span>
    <span class="n">creator</span> <span class="o">=</span> <span class="n">ConfigCommon</span><span class="p">.</span><span class="n">oco_forward_model</span><span class="p">,</span>
    <span class="n">instrument</span> <span class="o">=</span> <span class="p">{</span>
       <span class="n">creator</span> <span class="o">=</span> <span class="n">ConfigCommon</span><span class="p">.</span><span class="n">ils_instrument</span><span class="p">,</span>
@@ -219,7 +219,7 @@
 <div class="section" id="config-lua">
 <h2>config.lua<a class="headerlink" href="#config-lua" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">config.lua</span></code> file for any given instrument is where the <code class="docutils literal"><span class="pre">do_config</span></code> method is called. It is intentionally kept short, with all default behavior kept in <code class="docutils literal"><span class="pre">oco_base_config.lua</span></code> and higher.</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">oco_base_config&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">oco_base_config&quot;</span>
 
 <span class="n">config</span> <span class="o">=</span> <span class="n">OcoBaseConfig</span><span class="p">:</span><span class="n">new</span><span class="p">()</span>
 
@@ -231,7 +231,7 @@
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>The following snippets would all go in a modified <code class="docutils literal"><span class="pre">config.lua</span></code> before the <code class="docutils literal"><span class="pre">do_config</span></code> call. For instance:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">oco_base_config&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">oco_base_config&quot;</span>
 
 <span class="n">config</span> <span class="o">=</span> <span class="n">OcoBaseConfig</span><span class="p">:</span><span class="n">new</span><span class="p">()</span>
 
@@ -244,7 +244,7 @@
 <div class="section" id="toggle-retrieval">
 <h3>Toggle Retrieval<a class="headerlink" href="#toggle-retrieval" title="Permalink to this headline">¶</a></h3>
 <p>Most creators for items that are not band dependent have the <code class="docutils literal"><span class="pre">retrieved</span></code> attribute for controlling if the value appears in the state vector or not. Here are various items that can be controlled this way:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">H2O</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span> <span class="kc">true</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">H2O</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span> <span class="kc">true</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">CO2</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span>  <span class="kc">true</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">pressure</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span> <span class="kc">true</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">temperature</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span> <span class="kc">true</span>
@@ -255,20 +255,20 @@
 <div class="section" id="rayleigh-aerosol-model">
 <h3>Rayleigh Aerosol Model<a class="headerlink" href="#rayleigh-aerosol-model" title="Permalink to this headline">¶</a></h3>
 <p>To ignore any aerosol particles in the retrieval and instead use only Rayleigh scattering, use the following::</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">aerosol</span><span class="p">.</span><span class="n">creator</span> <span class="o">=</span> <span class="n">ConfigCommon</span><span class="p">.</span><span class="n">rayleigh_only</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">aerosol</span><span class="p">.</span><span class="n">creator</span> <span class="o">=</span> <span class="n">ConfigCommon</span><span class="p">.</span><span class="n">rayleigh_only</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="toggle-retrieval-bands">
 <h3>Toggle Retrieval Bands<a class="headerlink" href="#toggle-retrieval-bands" title="Permalink to this headline">¶</a></h3>
 <p>By default the OCO retrieval uses all three spectrometer bands. One can pick and choose by using the strings: <code class="docutils literal"><span class="pre">ABO2</span></code>, <code class="docutils literal"><span class="pre">WCO2</span></code>, <code class="docutils literal"><span class="pre">SCO2</span></code> as in the following example of using the A-Band only::</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">single_band_support&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">single_band_support&quot;</span>
 <span class="n">config</span><span class="p">.</span><span class="n">which_spectrometers</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">ABO2&quot;</span>
 <span class="n">init_single_band_support</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or to use only the two CO2 bands you would use the following:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">single_band_support&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">single_band_support&quot;</span>
 <span class="n">config</span><span class="p">.</span><span class="n">which_spectrometers</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">WCO2 SCO2&quot;</span>
 <span class="n">init_single_band_support</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
@@ -277,33 +277,33 @@
 <div class="section" id="ground-retrieval">
 <h3>Ground Retrieval<a class="headerlink" href="#ground-retrieval" title="Permalink to this headline">¶</a></h3>
 <p>Since the lambertian ground retrieval contains values for each band separately, the <code class="docutils literal"><span class="pre">retrieved</span></code> attribute will not work. Instead you can use the <code class="docutils literal"><span class="pre">retrieve_bands</span></code> attribute with a table containing a boolean for each band indicating whether or not it should be retrieved. For example to turn off the A-Band lambertian retrieval:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">ground</span><span class="p">.</span><span class="n">lambertian</span><span class="p">.</span><span class="n">retrieve_bands</span> <span class="o">=</span> <span class="p">{</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span> <span class="p">}</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">ground</span><span class="p">.</span><span class="n">lambertian</span><span class="p">.</span><span class="n">retrieve_bands</span> <span class="o">=</span> <span class="p">{</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span> <span class="p">}</span>
 </pre></div>
 </div>
 <p>Coxmunk retrievals do support the <code class="docutils literal"><span class="pre">retrieved</span></code> attribute and are controlled as follows:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">ground</span><span class="p">.</span><span class="n">coxmunk</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span> <span class="kc">false</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">ground</span><span class="p">.</span><span class="n">coxmunk</span><span class="p">.</span><span class="n">retrieved</span> <span class="o">=</span> <span class="kc">false</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="absco-tables">
 <h3>ABSCO Tables<a class="headerlink" href="#absco-tables" title="Permalink to this headline">¶</a></h3>
 <p>The ABSCO tables on the OCO systems are installed in a central location. The <code class="docutils literal"><span class="pre">absco_path</span></code> value in the configuration specifies this location:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">absco_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">/groups/algorithm/l2_fp/absco&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">absco_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">/groups/algorithm/l2_fp/absco&quot;</span>
 </pre></div>
 </div>
 <p>There is generally no need to change this configuration value unless processing on a different machine. However even then it is best to use the <code class="docutils literal"><span class="pre">abscodir</span></code> environmental variable which if present overrides what is present in the config file.</p>
 <p>A second ABSCO path, <code class="docutils literal"><span class="pre">absco_local_path</span></code> is a location where tables can be found on local disk from cluster machines. This is present to speed up processing, but the tables must be copied to each machine for this to be of any use:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">absco_local_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">/state/partition1/groups/algorithm/l2_fp/absco&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">absco_local_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">/state/partition1/groups/algorithm/l2_fp/absco&quot;</span>
 </pre></div>
 </div>
 <p>To change which tables are used for each gas the relative path and filename of each table under the <code class="docutils literal"><span class="pre">absco_dir</span></code> path is used::</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">CO2</span><span class="p">.</span><span class="n">absco</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">v4.2.0_unscaled/co2_v4.2.0_with_ctm.hdf&quot;</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">CO2</span><span class="p">.</span><span class="n">absco</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">v4.2.0_unscaled/co2_v4.2.0_with_ctm.hdf&quot;</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">H2O</span><span class="p">.</span><span class="n">absco</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">v4.2.0_unscaled/h2o_v4.2.0.hdf&quot;</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">O2</span><span class="p">.</span><span class="n">absco</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">v4.2.0_unscaled/o2_v4.2.0_drouin.hdf&quot;</span>
 </pre></div>
 </div>
 <p>The scaling applied to the tables for a gas can be changed with the <code class="docutils literal"><span class="pre">table_scale</span></code> attribute. If the value is an array then you can specify a different scaling per band. If a atomic value is used then the same value is used for all bands::</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">O2</span><span class="p">.</span><span class="n">table_scale</span> <span class="o">=</span> <span class="mf">1.0125</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">O2</span><span class="p">.</span><span class="n">table_scale</span> <span class="o">=</span> <span class="mf">1.0125</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">atmosphere</span><span class="p">.</span><span class="n">absorber</span><span class="p">.</span><span class="n">CO2</span><span class="p">.</span><span class="n">table_scale</span> <span class="o">=</span> <span class="p">{</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0038</span><span class="p">,</span> <span class="mf">0.9946</span> <span class="p">}</span>
 </pre></div>
 </div>
@@ -312,7 +312,7 @@
 <div class="section" id="ils-half-width">
 <h3>ILS Half Width<a class="headerlink" href="#ils-half-width" title="Permalink to this headline">¶</a></h3>
 <p>The half width used in ILS convolution can be controlled band by band. The ILS expects a <code class="docutils literal"><span class="pre">DoubleWithUnit</span></code> object which is simply a class that wraps a value with its unit. The values are set in the <code class="docutils literal"><span class="pre">ils_half_width</span></code> array as shown in this example:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">instrument</span><span class="p">.</span><span class="n">ils_half_width</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">DoubleWithUnit</span><span class="p">(</span><span class="mf">4.09e-04</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">um&quot;</span><span class="p">)</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">instrument</span><span class="p">.</span><span class="n">ils_half_width</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">DoubleWithUnit</span><span class="p">(</span><span class="mf">4.09e-04</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">um&quot;</span><span class="p">)</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">instrument</span><span class="p">.</span><span class="n">ils_half_width</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">DoubleWithUnit</span><span class="p">(</span><span class="mf">1.08e-03</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">um&quot;</span><span class="p">)</span>
 <span class="n">config</span><span class="p">.</span><span class="n">fm</span><span class="p">.</span><span class="n">instrument</span><span class="p">.</span><span class="n">ils_half_width</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">DoubleWithUnit</span><span class="p">(</span><span class="mf">1.40e-03</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">um&quot;</span><span class="p">)</span>
 </pre></div>
@@ -321,7 +321,7 @@
 <div class="section" id="high-resolution-spectra">
 <h3>High Resolution Spectra<a class="headerlink" href="#high-resolution-spectra" title="Permalink to this headline">¶</a></h3>
 <p>The following option will enable output of high resolution spectra. These values are the raw output of the radiative transfer before the instrument model and solar model are applied. Furthermore, they will be on the high resolution grid used in the radiative transfer. When enabled a new group <code class="docutils literal"><span class="pre">HighResSpectra</span></code> will appear in the output files.</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">config</span><span class="p">.</span><span class="n">write_high_res_spectra</span> <span class="o">=</span> <span class="kc">true</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">.</span><span class="n">write_high_res_spectra</span> <span class="o">=</span> <span class="kc">true</span>
 </pre></div>
 </div>
 </div>
@@ -357,11 +357,11 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="testing.html"
-                        title="previous chapter">Testing</a></p>
+  <p class="topless"><a href="runs_setup.html"
+                        title="previous chapter">Runs Setup</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="python_wrappers.html"
-                        title="next chapter">Python Wrappers</a></p>
+  <p class="topless"><a href="running_jobs.html"
+                        title="next chapter">Running Jobs</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -385,10 +385,10 @@
     <ul>
         <li>
           &larr;
-          <a href="testing.html" title="Previous document">Testing</a>
+          <a href="runs_setup.html" title="Previous document">Runs Setup</a>
         </li>
         <li>
-          <a href="python_wrappers.html" title="Next document">Python Wrappers</a>
+          <a href="running_jobs.html" title="Next document">Running Jobs</a>
           &rarr;
         </li>
     </ul>
@@ -401,7 +401,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.4
+      1.3.6
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

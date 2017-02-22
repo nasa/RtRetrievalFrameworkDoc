@@ -65,15 +65,15 @@
 <div class="section" id="building">
 <h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
 <p>There is some third party software included with the source code that need compiling along with our code. To build the framework&#8217;s code along with the third party software, execute the following:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> mkdir build_optimized
-<span class="gp">$</span> <span class="nb">cd </span>build_optimized
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir build_optimized
+<span class="gp">$</span> <span class="nb">cd</span> build_optimized
 <span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build
 <span class="gp">$</span> make all
 </pre></div>
 </div>
 <p>In the above replace <code class="docutils literal"><span class="pre">/path/to/source</span></code> with the location where you downloaded the software during the <a class="reference internal" href="setup.html"><em>Setup</em></a> instructions.</p>
 <p>The <code class="docutils literal"><span class="pre">configure</span></code> command creates the Makefile to use. You only need to run this when you are creating a new build directory, after that you can just rerun <code class="docutils literal"><span class="pre">make</span> <span class="pre">all</span></code> to get any software updates. Configure will check a bunch of things on the system, and in the end print a report something like:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="go">Level 2 Full Physics is now configured</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Level 2 Full Physics is now configured</span>
 
 <span class="go"> Installation directory:       /path/to/build_optimized/install</span>
 <span class="go"> Build debug version:          no</span>
@@ -87,19 +87,19 @@
 </pre></div>
 </div>
 <p>If you are building from within your source checkout you can just use the following script included with the source:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> ./nonjpl_build.script
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ./nonjpl_build.script
 </pre></div>
 </div>
 <p>In order to run all of the unit tests, you&#8217;ll also need to have a copy of the ABSCO (Absoprtion Coefficient) tables. These files must be obtained separately from JPL.</p>
 <p>For serious development it is recommended to compile the third party software once and then refer to it in subsequent builds:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> mkdir build_third_party
-<span class="gp">$</span> <span class="nb">cd </span>build_third_party
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir build_third_party
+<span class="gp">$</span> <span class="nb">cd</span> build_third_party
 <span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build --prefix<span class="o">=</span>/path/for/third_party
 <span class="gp">$</span> make thirdparty
 </pre></div>
 </div>
 <p>Now subsequent builds can use this directory instead of recompiling the third party packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>/install/path/for/third_party
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>/install/path/for/third_party
 <span class="gp">$</span> make all
 </pre></div>
 </div>
@@ -161,7 +161,7 @@
 <div class="section" id="debugging">
 <h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
 <p>It has been discovered that gfortran works better with valgrind and debugging (although our &#8220;official&#8221; builds use ifort). The default gfortran on many systems is often too old, we use Fortran 2003 features that were not available until GCC version 4.5. To use a different gfortran version, you can use the following configure command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> /path/to/source/configure <span class="nv">FC</span><span class="o">=</span>gfortran-4.5 <span class="nv">CC</span><span class="o">=</span>gcc-4.5 <span class="nv">CXX</span><span class="o">=</span>g++-4.5 <span class="se">\</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /path/to/source/configure <span class="nv">FC</span><span class="o">=</span>gfortran-4.5 <span class="nv">CC</span><span class="o">=</span>gcc-4.5 <span class="nv">CXX</span><span class="o">=</span>g++-4.5 <span class="se">\</span>
 <span class="go">    --enable-debug &lt;other config options&gt;</span>
 </pre></div>
 </div>
@@ -236,7 +236,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.4
+      1.3.6
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

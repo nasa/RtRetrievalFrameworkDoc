@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Running Jobs &mdash; RT Retrieval Framework  documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
+    <link rel="next" title="Python Wrappers" href="python_wrappers.html" />
+    <link rel="prev" title="Lua Configuration" href="lua.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  </head>
+  <body role="document">
+    <header id="pageheader"><h1><a href="index.html ">
+        RT Retrieval Framework  documentation
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="lua.html" title="Previous document">Lua Configuration</a>
+        </li>
+        <li>
+          <a href="python_wrappers.html" title="Next document">Python Wrappers</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="running-jobs">
+<h1>Running Jobs<a class="headerlink" href="#running-jobs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="running-l2-fp-through-populator-produced-scripts">
+<h2>Running L2 FP Through Populator Produced Scripts<a class="headerlink" href="#running-l2-fp-through-populator-produced-scripts" title="Permalink to this headline">¶</a></h2>
+<p>The Populator supports creating scripts customized for several cluster management systems. The target cluster is selected using <code class="docutils literal"><span class="pre">-t</span></code> argument and one of the following strings:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>pbs_pro</td>
+<td>PBS Professional</td>
+</tr>
+<tr class="row-even"><td>torque</td>
+<td>Torque</td>
+</tr>
+<tr class="row-odd"><td>pleiades</td>
+<td>Pleiades Supercomputer</td>
+</tr>
+</tbody>
+</table>
+<p>The default cluster when the <code class="docutils literal"><span class="pre">-t</span></code> argument is not supplied is PBS Professional.</p>
+<p>When the Populator is run with the <code class="docutils literal"><span class="pre">-b</span></code> option specifying a path to a L2 FP binary the following scripts may be created:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>l2_fp_job.sh</td>
+<td>Runs an individual sounding, created for all target clusters</td>
+</tr>
+<tr class="row-even"><td>launch_jobs.sh</td>
+<td>Launches jobs on PBS Profession and Torque clusters</td>
+</tr>
+<tr class="row-odd"><td>pleiades_job.sh</td>
+<td>Launches jobs on the Pleiades Supercomputer machines</td>
+</tr>
+</tbody>
+</table>
+<p>You normally would not run <code class="docutils literal"><span class="pre">l2_fp_job.sh</span></code> directly, although it can be useful when debugging a single sounding. This script will take an argument specifying the index of which sounding to process. To run multiple instances of <code class="docutils literal"><span class="pre">l2_fp_job.sh</span></code> simultaneously on one computer you can use <a class="reference external" href="http://www.gnu.org/software/parallel/">GNU Parallels</a>. For instance to run the first four soundings you would run it as follows:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> parallel ./l2_fp_job.sh ::: <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> 3
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">launch_jobs.sh</span></code> script can only on be run from the head machine of a PBS Professional or Torque cluster, the machine where <code class="docutils literal"><span class="pre">qsub</span></code> exists. Any arguments specified to launch_jobs.sh will be passed directly to <code class="docutils literal"><span class="pre">qsub</span></code>. On the SCF system the one required argument missing from the <code class="docutils literal"><span class="pre">qsub</span></code> call done in launch_jobs.sh is the argument specifying which queue to use. This argument is specified by the <code class="docutils literal"><span class="pre">-q</span></code> option and hence the normal use case for running launch_jobs.sh is as follows:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> launch_jobs.sh -q long
+</pre></div>
+</div>
+<p>The above command will launch all soundings into the long queue. Should you wish to use a different queue just swap out &#8220;long&#8221; for the desired queue name. Any additional options for <code class="docutils literal"><span class="pre">qsub</span></code> can also be specified in the call to the launch_jobs.sh script.</p>
+</div>
+<div class="section" id="additional-cluster-documentation">
+<h2>Additional Cluster Documentation<a class="headerlink" href="#additional-cluster-documentation" title="Permalink to this headline">¶</a></h2>
+<p>For full documentation on TORQUE job submission, please consult this document: <a class="reference external" href="http://www.clusterresources.com/torquedocs21/2.1jobsubmission.shtml">http://www.clusterresources.com/torquedocs21/2.1jobsubmission.shtml</a></p>
+<p>For additional documentation on the TORQUE job submission command <code class="docutils literal"><span class="pre">qsub</span></code>, please consult this document: <a class="reference external" href="http://www.clusterresources.com/torquedocs/commands/qsub.shtml">http://www.clusterresources.com/torquedocs/commands/qsub.shtml</a></p>
+<p>PBS Professional documentation can be found here: <a class="reference external" href="http://www.pbsworks.com/SupportDocuments.aspx">http://www.pbsworks.com/SupportDocuments.aspx</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Running Jobs</a><ul>
+<li><a class="reference internal" href="#running-l2-fp-through-populator-produced-scripts">Running L2 FP Through Populator Produced Scripts</a></li>
+<li><a class="reference internal" href="#additional-cluster-documentation">Additional Cluster Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lua.html"
+                        title="previous chapter">Lua Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python_wrappers.html"
+                        title="next chapter">Python Wrappers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/running_jobs.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="lua.html" title="Previous document">Lua Configuration</a>
+        </li>
+        <li>
+          <a href="python_wrappers.html" title="Next document">Python Wrappers</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.3.6
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

@@ -22,7 +22,9 @@ The software provides a flexible, efficient, and accurate tool to retrieve the a
    system_configuration
    compilation
    testing
+   runs_setup
    lua
+   running_jobs
    python_wrappers
    developer_information
    other_documentation

@@ -26,7 +26,7 @@
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
     <link rel="next" title="Developer’s Information" href="developer_information.html" />
-    <link rel="prev" title="Lua Configuration" href="lua.html" />
+    <link rel="prev" title="Running Jobs" href="running_jobs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   </head>
@@ -39,7 +39,7 @@
     <ul>
         <li>
           &larr;
-          <a href="lua.html" title="Previous document">Lua Configuration</a>
+          <a href="running_jobs.html" title="Previous document">Running Jobs</a>
         </li>
         <li>
           <a href="developer_information.html" title="Next document">Developer&#8217;s Information</a>
@@ -68,52 +68,52 @@
 <div class="section" id="building">
 <h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
 <p>The Python bindings are not built by default, you need to explicitly request that the bindings be compiled. This is done by adding an option to the configuration line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> /path/to/source/configure --with-python-swig
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /path/to/source/configure --with-python-swig
 </pre></div>
 </div>
 <p>You need to do a full install, not just a <code class="docutils literal"><span class="pre">make</span> <span class="pre">all</span></code>. This is because Python needs to see the libraries in a particular directory structure that gets created with the install. So you would build with:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> make all <span class="o">&amp;&amp;</span> make install
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make all <span class="o">&amp;&amp;</span> make install
 </pre></div>
 </div>
 </div>
 <div class="section" id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>After building, you need to make sure that the Python path is set to point to the installed library. You can do this using the setup script installed in the install area:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">source</span> ./install/setup_fp_env.sh
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">source</span> ./install/setup_fp_env.sh
 </pre></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>First you will need to load the correct environmental variables then load a Python shell:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">source</span> ./install/setup_fp_env.sh
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">source</span> ./install/setup_fp_env.sh
 <span class="gp">$</span> ipython --matplotlib auto
 </pre></div>
 </div>
 <p>The easiest way to get started is by using a pre-existing Lua configuration:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">full_physics</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">full_physics</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">matplotlib.pylab</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">In [3]: </span><span class="n">conf</span> <span class="o">=</span> <span class="n">L2FpConfigurationLua</span><span class="p">(</span><span class="s">&#39;/path/to/existing_run/config.lua&#39;</span><span class="p">)</span>
+<span class="gp">In [3]: </span><span class="n">conf</span> <span class="o">=</span> <span class="n">L2FpConfigurationLua</span><span class="p">(</span><span class="s1">&#39;/path/to/existing_run/config.lua&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Add some information about getting the right enviromental variables made available.</strong></p>
 <div class="section" id="example-1-plotting-solar-spectrum">
 <h3>Example 1 - Plotting Solar Spectrum<a class="headerlink" href="#example-1-plotting-solar-spectrum" title="Permalink to this headline">¶</a></h3>
 <p>Get help on what conf is and can do:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="n">help</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">help</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you are using IPython, you can just use a <code class="docutils literal"><span class="pre">?</span></code> after the object to get help:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="n">conf</span><span class="err">?</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">conf</span><span class="err">?</span>
 </pre></div>
 </div>
 <p>The solar model object is one of several spectrum effects, arbitrary operators on spectrum before instrument effects have been processed. It will probably be at index 0 of the spectrum effects list. Get help on what solar model is and can do:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">help</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">speceff_val</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">help</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">speceff_val</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The second index above is the band index. Note that this is pretty much the same documentation as found in the <a class="reference external" href="http://nephthys.jpl.nasa.gov/~buildbot/doxygen/index.html">Doxygen Documentation</a>, or the <a class="reference external" href="http://nephthys.jpl.nasa.gov/~buildbot/python/index.html">Python Documentation</a> but it can be convenient to do this in IPython without going to a browser.</p>
 <p>We can plot the solar model with a couple of short commands as follows:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">In [6]: </span><span class="n">spec_dom</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">pixel_spectral_domain</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
 <span class="gp">In [7]: </span><span class="n">solar_spec</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">speceff_val</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span><span class="o">.</span><span class="n">solar_spectrum</span><span class="p">(</span><span class="n">spec_dom</span><span class="p">)</span>
 <span class="gp">In [8]: </span><span class="n">plot</span><span class="p">(</span><span class="n">solar_spec</span><span class="o">.</span><span class="n">wavenumber</span><span class="p">,</span> <span class="n">solar_spec</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -124,7 +124,7 @@
 <div class="section" id="example-2-forward-model-without-jacobian">
 <h3>Example 2 - Forward model without Jacobian<a class="headerlink" href="#example-2-forward-model-without-jacobian" title="Permalink to this headline">¶</a></h3>
 <p>Run forward model and get radiances only for all the bands:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiance_all</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiance_all</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The boolean argument to <code class="docutils literal"><span class="pre">radiance_all</span></code> tells the code to skip Jacobian calculations.</p>
@@ -132,14 +132,14 @@
 <div class="section" id="example-3-forward-model-with-jacobian">
 <h3>Example 3 - Forward model with Jacobian<a class="headerlink" href="#example-3-forward-model-with-jacobian" title="Permalink to this headline">¶</a></h3>
 <p>Run forward model and get radiance and Jacobian (takes longer to run):</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [10]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiance_all</span><span class="p">()</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiance_all</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-4-radiative-transfer">
 <h3>Example 4 - Radiative Transfer<a class="headerlink" href="#example-4-radiative-transfer" title="Permalink to this headline">¶</a></h3>
 <p>Run just the radiative transfer w/o applying solar or instrument model:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">In [12]: </span><span class="n">ils_hw</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">ils_half_width</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
 <span class="gp">In [13]: </span><span class="n">spec_pix</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">pixel_spectral_domain</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
 <span class="gp">In [14]: </span><span class="n">spec_samp</span> <span class="o">=</span> \
@@ -150,25 +150,25 @@
 </div>
 <img alt="_images/wrappers-fig_2.png" class="align-center" src="_images/wrappers-fig_2.png" />
 <p>We can also run the RT with Jacobian not disabled and then plot up a portion of the spectral data (first dim) for all state vector types:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">rrt</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiative_transfer</span><span class="o">.</span><span class="n">reflectance</span><span class="p">(</span><span class="n">spec_samp</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">rrt</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiative_transfer</span><span class="o">.</span><span class="n">reflectance</span><span class="p">(</span><span class="n">spec_samp</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span>
 <span class="gp">In [18]: </span><span class="n">jac</span> <span class="o">=</span> <span class="n">rrt</span><span class="o">.</span><span class="n">spectral_range</span><span class="o">.</span><span class="n">data_ad</span><span class="o">.</span><span class="n">jacobian</span>
 <span class="gp">In [19]: </span><span class="n">matshow</span><span class="p">(</span><span class="n">jac</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">)</span>
-<span class="gp">In [20]: </span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;State Index&quot;</span><span class="p">)</span>
-<span class="gp">In [21]: </span><span class="n">ylabel</span><span class="p">(</span><span class="s">&quot;Spectral Point&quot;</span><span class="p">)</span>
+<span class="gp">In [20]: </span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;State Index&quot;</span><span class="p">)</span>
+<span class="gp">In [21]: </span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Spectral Point&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This shows that the Jacobian is dominated by one value:</p>
 <img alt="_images/wrappers-fig_5.png" class="align-center" src="_images/wrappers-fig_5.png" />
 <p>Look at vector and find largest one, and name of it:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">state_vector</span><span class="o">.</span><span class="n">state_vector_name</span><span class="p">[</span><span class="n">argmax</span><span class="p">(</span><span class="n">jac</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])]</span>
-<span class="gr">Out[22]: </span><span class="s">&#39;Ground Lambertian A-Band Albedo Parm 2&#39;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">state_vector</span><span class="o">.</span><span class="n">state_vector_name</span><span class="p">[</span><span class="n">argmax</span><span class="p">(</span><span class="n">jac</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])]</span>
+<span class="gr">Out[22]: </span><span class="s1">&#39;Ground Lambertian A-Band Albedo Parm 2&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-5-apply-solar-and-instrument-models">
 <h3>Example 5 - Apply Solar and Instrument Models<a class="headerlink" href="#example-5-apply-solar-and-instrument-models" title="Permalink to this headline">¶</a></h3>
 <p>To apply the solar model and the instrument model along with other effects we would use the RT spectrum from the last example:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [26]: </span><span class="n">rinst</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">apply_spectrum_corrections</span><span class="p">(</span><span class="n">rrt</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">rinst</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">apply_spectrum_corrections</span><span class="p">(</span><span class="n">rrt</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span>
 <span class="gp">In [27]: </span><span class="n">plot</span><span class="p">(</span><span class="n">rinst</span><span class="o">.</span><span class="n">spectral_domain</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rinst</span><span class="o">.</span><span class="n">spectral_range</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -179,7 +179,7 @@
 <p><strong>DEPRECATED</strong></p>
 <p>Python SciPy comes with some generic solvers, including one based on the standard Fortran minpack routines. We have a version of the cost function that uses the more standard format of embedding the a priori values, a priori covariance matrix, and radiance uncertainty:</p>
 <p>As an example of using this:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="go">import scipy.optimize</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go">import scipy.optimize</span>
 
 <span class="go">cost_func = FmStandardFormatCostFunction(conf.forward_model(), \</span>
 <span class="go">        conf.spectral_window_apply().radiance(), \</span>
@@ -202,7 +202,7 @@
 </pre></div>
 </div>
 <p>This print out:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="go">Initial chisq: 131.571840</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go">Initial chisq: 131.571840</span>
 <span class="go">Final chisq: 18.775889</span>
 </pre></div>
 </div>
@@ -216,10 +216,10 @@
 <p>The ConfigurationHeritage interface in the earlier examples are tied to a particular run configuration file. But there is no reason that you need to create objects strictly from the run file, you can also use the more generic constructors of various classes, or modify objects after they have been created.</p>
 <p>Continuing our example, here a wrapper class that sets up Lidort, the LRad polarization correction, and a model atmosphere based on the configuration file. You can then vary parameters such as the surface pressure, solar zenith angle, and number of streams. This example does not include the LSI speed up (since this example looks at a single wavelength), but you could include that is you wanted to for some reason.</p>
 <p>We create a new class &#8220;RtExtraKnobs&#8221;. Save this in the file &#8220;rt_extra_knobs.py&#8221;. Note while you are developing code like this, you can repeatedly load updated versions by using the ipython &#8220;%run&#8221; command (once it is complete, you can just import it like any other module).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">full_physics</span> <span class="kn">as</span> <span class="nn">fp</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">full_physics</span> <span class="kn">as</span> <span class="nn">fp</span>
 
 <span class="k">class</span> <span class="nc">RtExtraKnobs</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s">&quot;/groups/algorithm/python_tryout/sample_run/oco_l2.run&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s2">&quot;/groups/algorithm/python_tryout/sample_run/oco_l2.run&quot;</span><span class="p">):</span>
          <span class="n">conf</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">ConfigurationHeritage</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
          <span class="bp">self</span><span class="o">.</span><span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span>
          <span class="bp">self</span><span class="o">.</span><span class="n">atm</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">atmosphere</span><span class="p">()</span>
@@ -227,24 +227,24 @@
          <span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">level_1b</span><span class="p">()</span>
          <span class="bp">self</span><span class="o">.</span><span class="n">band</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c"># Return radiance for single point for given solar zenith, pressure,</span>
-    <span class="c"># and number of streams</span>
+    <span class="c1"># Return radiance for single point for given solar zenith, pressure,</span>
+    <span class="c1"># and number of streams</span>
     <span class="k">def</span> <span class="nf">radiance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wn</span><span class="p">,</span> <span class="n">sza</span><span class="p">,</span> <span class="n">surface_press</span><span class="p">,</span> <span class="n">nstream</span><span class="p">):</span>
          <span class="k">try</span><span class="p">:</span>
              <span class="bp">self</span><span class="o">.</span><span class="n">atm</span><span class="o">.</span><span class="n">pressure</span><span class="p">()</span><span class="o">.</span><span class="n">surface_pressure</span><span class="p">(</span><span class="n">surface_press</span><span class="p">)</span>
              <span class="n">rt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rt</span><span class="p">(</span><span class="n">sza</span><span class="p">,</span> <span class="n">nstream</span><span class="p">)</span>
-             <span class="c"># Don&#39;t need log message for processing one point</span>
+             <span class="c1"># Don&#39;t need log message for processing one point</span>
              <span class="n">fp</span><span class="o">.</span><span class="n">FpLogger</span><span class="o">.</span><span class="n">turn_off_logger</span><span class="p">()</span>
              <span class="k">return</span> <span class="n">rt</span><span class="o">.</span><span class="n">radiance</span><span class="p">([</span><span class="n">wn</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">band</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
          <span class="k">finally</span><span class="p">:</span>
-             <span class="c"># Turn back on</span>
+             <span class="c1"># Turn back on</span>
              <span class="n">fp</span><span class="o">.</span><span class="n">FpLogger</span><span class="o">.</span><span class="n">turn_on_logger</span><span class="p">()</span>
 
-    <span class="c"># The relative azimuth needs to be modified because the convention used</span>
-    <span class="c"># in the OCO L1B1 file to to take both the solar and observation angles</span>
-    <span class="c"># as viewed from an observer standing in the FOV. LIDORT on the other</span>
-    <span class="c"># hand has the &quot;follow the photons&quot; convention. This results in a 180</span>
-    <span class="c"># degree change</span>
+    <span class="c1"># The relative azimuth needs to be modified because the convention used</span>
+    <span class="c1"># in the OCO L1B1 file to to take both the solar and observation angles</span>
+    <span class="c1"># as viewed from an observer standing in the FOV. LIDORT on the other</span>
+    <span class="c1"># hand has the &quot;follow the photons&quot; convention. This results in a 180</span>
+    <span class="c1"># degree change</span>
     <span class="k">def</span> <span class="nf">__rel_azm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">band</span><span class="p">):</span>
          <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">180</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">sounding_azimuth</span><span class="p">(</span><span class="n">band</span><span class="p">))</span> <span class="o">-</span> \
              <span class="bp">self</span><span class="o">.</span><span class="n">level_1b</span><span class="o">.</span><span class="n">solar_azimuth</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
@@ -252,16 +252,16 @@
          <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">360</span>
          <span class="k">return</span> <span class="n">r</span>
 
-    <span class="c"># Get RT for a particular solar zenith angle and number of streams</span>
+    <span class="c1"># Get RT for a particular solar zenith angle and number of streams</span>
     <span class="k">def</span> <span class="nf">__rt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solar_zenith</span><span class="p">,</span> <span class="n">number_stream</span><span class="p">):</span>
          <span class="n">band</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">band</span>
-         <span class="c"># Hardcode these for this example</span>
+         <span class="c1"># Hardcode these for this example</span>
          <span class="n">nbrdf_quadratures</span> <span class="o">=</span> <span class="mi">50</span>
          <span class="n">nstoke</span> <span class="o">=</span> <span class="mi">3</span>
          <span class="n">ss_corr</span> <span class="o">=</span> <span class="bp">True</span>
          <span class="n">delta_m_scaling</span> <span class="o">=</span> <span class="bp">True</span>
          <span class="n">uplooking</span> <span class="o">=</span> <span class="bp">False</span>
-         <span class="c"># Value needed to be true for LRad</span>
+         <span class="c1"># Value needed to be true for LRad</span>
          <span class="n">get_rad_dif</span> <span class="o">=</span> <span class="bp">True</span>
          <span class="n">nmom</span> <span class="o">=</span> <span class="n">number_stream</span> <span class="k">if</span><span class="p">(</span><span class="n">number_stream</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="k">else</span> <span class="mi">4</span>
          <span class="n">rt_lidort</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">LidortDriver</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_vector</span><span class="p">,</span>
@@ -279,7 +279,7 @@
 </pre></div>
 </div>
 <p>Once we have this module, we can use this in ipython to generate simple plots:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="go">from rt_extra_knobs import *</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go">from rt_extra_knobs import *</span>
 <span class="go">rt = RtExtraKnobs()</span>
 <span class="go">wn = 13005.0</span>
 <span class="go">sza = 74.0</span>
@@ -339,8 +339,8 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="lua.html"
-                        title="previous chapter">Lua Configuration</a></p>
+  <p class="topless"><a href="running_jobs.html"
+                        title="previous chapter">Running Jobs</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="developer_information.html"
                         title="next chapter">Developer&#8217;s Information</a></p>
@@ -367,7 +367,7 @@
     <ul>
         <li>
           &larr;
-          <a href="lua.html" title="Previous document">Lua Configuration</a>
+          <a href="running_jobs.html" title="Previous document">Running Jobs</a>
         </li>
         <li>
           <a href="developer_information.html" title="Next document">Developer&#8217;s Information</a>
@@ -383,7 +383,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.4
+      1.3.6
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

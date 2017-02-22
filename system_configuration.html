@@ -94,25 +94,25 @@
 <div class="section" id="gentoo-deployment-steps">
 <h3>Gentoo Deployment Steps<a class="headerlink" href="#gentoo-deployment-steps" title="Permalink to this headline">¶</a></h3>
 <p>Install gdb if you would like to use that, it is not installed by default:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> emerge -av gdb
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av gdb
 </pre></div>
 </div>
 <p>If you do not already have Subversion installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> emerge -av subversion
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av subversion
 </pre></div>
 </div>
 <p>Install scripting languages and required supporting packages needed by the build process:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> emerge -av ruby rubygems
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av ruby rubygems
 </pre></div>
 </div>
 <p>The Ruby narray package is also required, but may only be available in the Gentoo testing branch. If you have not enabled testing for your architecture you would have to do the follow (if your architecture is amd64):</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">echo</span> <span class="s1">&#39;ACCEPT_KEYWORDS=&quot;~amd64&quot;&#39;</span> &gt; /etc/make.conf
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s1">&#39;ACCEPT_KEYWORDS=&quot;~amd64&quot;&#39;</span> &gt; /etc/make.conf
 <span class="gp">$</span> emerge -av narray
 </pre></div>
 </div>
 <p>We also require the installation of Python but by default Gentoo satisfies that through the eselect-python package. Note that emerging the dev-lang/python will install Python 3.x which is not yet used by our software.</p>
 <p>Install Python packages for support utils:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> emerge -av numpy
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av numpy
 <span class="gp">$</span> emerge -av h5py
 <span class="gp">$</span> emerge -av ply
 </pre></div>
@@ -123,46 +123,46 @@
 <div class="section" id="fedora-centos-deployment-steps">
 <h3>Fedora/CentOS Deployment Steps<a class="headerlink" href="#fedora-centos-deployment-steps" title="Permalink to this headline">¶</a></h3>
 <p>Under CentOS you may need to update to a newer version of gcc/gfortran. CentoOS is conservative with GCC updates and keep newer versions in separate packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install gcc44 gcc44-gfortran gcc44-c++
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install gcc44 gcc44-gfortran gcc44-c++
 </pre></div>
 </div>
 <p>Fedora has the latest GCC in the default packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install gcc gcc-gfortran gcc-c++
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install gcc gcc-gfortran gcc-c++
 </pre></div>
 </div>
 <p>A Fedora minimal system will also need the following:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install make automake patch zlib-devel bzip2-devel
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install make automake patch zlib-devel bzip2-devel
 </pre></div>
 </div>
 <p>If you do not already have Subversion installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install subversion
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install subversion
 </pre></div>
 </div>
 <p>Install scripting languages needed by build process:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install python ruby
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install python ruby
 </pre></div>
 </div>
 <p>Install ruby development packages needed for using gem to install ruby packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install ruby-devel
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install ruby-devel
 </pre></div>
 </div>
 <p>For Fedora install the rubygems package:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install rubygems
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install rubygems
 </pre></div>
 </div>
 <p>For CentOS (also possibly Redhat) install rubygems from source. Get the latest package from the <a class="reference external" href="http://rubygems.org/pages/download">RubyGems.org</a> website then install:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> tar zfvx rubygems-X.X.X.tgz
-<span class="gp">$</span> <span class="nb">cd </span>rubygems-X.X.X
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> tar zfvx rubygems-X.X.X.tgz
+<span class="gp">$</span> <span class="nb">cd</span> rubygems-X.X.X
 <span class="gp">$</span> ruby setup.rb
 </pre></div>
 </div>
 <p>Note that the latest version of Ruby Gems might not work with CentOS&#8217;s Ruby version. You may need to try earlier version.</p>
 <p>For CentOS also install:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> yum install ruby-rdoc
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install ruby-rdoc
 </pre></div>
 </div>
 <p>Use rubygems to install narray:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gem install narray
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gem install narray
 </pre></div>
 </div>
 <p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
@@ -171,31 +171,31 @@
 <div class="section" id="ubuntu-debian-deployment-steps">
 <h3>Ubuntu/Debian Deployment Steps<a class="headerlink" href="#ubuntu-debian-deployment-steps" title="Permalink to this headline">¶</a></h3>
 <p>Install automake if you plan on developing the code and need to update the Makefile after adding files:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install automake
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install automake
 </pre></div>
 </div>
 <p>Most other distributions provide gfortran along with gcc, but Ubuntu keeps it in separate packages. Install gfortran if not already installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install gfortran
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install gfortran
 </pre></div>
 </div>
 <p>Install gdb if you would like to use that, it is not installed by default:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install gdb
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install gdb
 </pre></div>
 </div>
 <p>If you do not already have Subversion installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install subversion
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install subversion
 </pre></div>
 </div>
 <p>Install scripting languages and required supporting packages needed by build process:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python ruby rubygems libnarray-ruby
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install python ruby rubygems libnarray-ruby
 </pre></div>
 </div>
 <p>Install system library headers that are not installed by default:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install libz-dev libbz2-dev
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install libz-dev libbz2-dev
 </pre></div>
 </div>
 <p>Install Python packages needed for support and operation tools:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python-ply python-h5py
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install python-ply python-h5py
 </pre></div>
 </div>
 <p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
@@ -204,23 +204,23 @@
 <div class="section" id="opensuse-deployment-steps">
 <h3>OpenSuSE Deployment Steps<a class="headerlink" href="#opensuse-deployment-steps" title="Permalink to this headline">¶</a></h3>
 <p>Install development packages using development patterns:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> zypper install -t pattern devel_C_C++ devel_basis devel_ruby
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> zypper install -t pattern devel_C_C++ devel_basis devel_ruby
 </pre></div>
 </div>
 <p>Install gfortran if not already installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> zypper install gcc-fortran
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> zypper install gcc-fortran
 </pre></div>
 </div>
 <p>If you do not already have Subversion installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> zypper install subversion
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> zypper install subversion
 </pre></div>
 </div>
 <p>Install Ruby support packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gem install narray
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gem install narray
 </pre></div>
 </div>
 <p>Install system library headers that are not installed by default:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> zypper install zlib-devel libbz2-devel
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> zypper install zlib-devel libbz2-devel
 </pre></div>
 </div>
 <p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
@@ -244,14 +244,14 @@
 <div class="section" id="install-packages">
 <h4>Install Packages<a class="headerlink" href="#install-packages" title="Permalink to this headline">¶</a></h4>
 <p>Install packages using port:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo port install gcc44 python27 py27-ipython hdf5-18 boost gsl
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo port install gcc44 python27 py27-ipython hdf5-18 boost gsl
 </pre></div>
 </div>
 </div>
 <div class="section" id="configuration">
 <h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h4>
 <p>The configuration is slightly tricky, if you want to have python working. The issue is that you need to use the same version of gcc and g+ used to create python, while at the same time using a different version of gfortran. The configuration used in development is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> .../configure <span class="se">\</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> .../configure <span class="se">\</span>
 <span class="go">    FCLIBS=&quot;/opt/local/lib/gcc44/gcc/x86_64-apple-darwin10/4.4.5/libgfortranbegin.a \</span>
 <span class="go">    /opt/local/lib/gcc44/libgfortran.dylib&quot; \</span>
 <span class="go">    FC=/opt/local/bin/gfortran-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \</span>
@@ -260,7 +260,7 @@
 </div>
 <p>Note the &#8220;FCLIBS&#8221; - this is required. This works around splitting between different versions for g+ and gfortran. Without this, the python library will use the libstdc+ coming from g+-4.4, not the system one. This results in fairly obscure memory errors when std::string from one version of g is passed to a library expecting a different version.</p>
 <p>Note that the strict requirement on the compiler is only needed for building the python wrappers. If you don&#8217;t care about the wrappers, you can leave off the FCLIBS and use the same version for gfortran and for g+ and gcc. For nonpython development, the configuration we used is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> .../configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build <span class="nv">FC</span><span class="o">=</span>/opt/local/bin/gfortran-mp-4.4 <span class="se">\</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> .../configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build <span class="nv">FC</span><span class="o">=</span>/opt/local/bin/gfortran-mp-4.4 <span class="se">\</span>
 <span class="go">    CXX=/opt/local/bin/g++-mp-4.4 \</span>
 <span class="go">    CC=/opt/local/bin/gcc-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \</span>
 <span class="go">    --enable-debug --enable-maintainer-mode</span>
@@ -289,11 +289,11 @@
 <div class="section" id="install-fink-packages">
 <h4>Install Fink Packages<a class="headerlink" href="#install-fink-packages" title="Permalink to this headline">¶</a></h4>
 <p>Install free Fortran compilers:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> fink install g77 g95
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> fink install g77 g95
 </pre></div>
 </div>
 <p>Install Python packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> fink install python27 numpy-py27 h5py-py27 matplotlib-py27 scipy-py27 ipython-py27
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> fink install python27 numpy-py27 h5py-py27 matplotlib-py27 scipy-py27 ipython-py27
 </pre></div>
 </div>
 <p>Since we are using the Fink unstable repository everything comes from source and the compilation which includes many dependencies can takes a fair amount of time.</p>
@@ -388,7 +388,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.4
+      1.3.6
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 
