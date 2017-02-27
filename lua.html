@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Lua Configuration &mdash; RT Retrieval Framework  documentation</title>
+    <title>Lua Configuration &#8212; RT Retrieval Framework  documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
     <link rel="next" title="Running Jobs" href="running_jobs.html" />
     <link rel="prev" title="Runs Setup" href="runs_setup.html" />
@@ -71,8 +73,7 @@
 <h2>Organization<a class="headerlink" href="#organization" title="Permalink to this headline">¶</a></h2>
 <p>There are many separate Lua files involved in a single execution. These files have been organized such that the files with more general functionality are extended by files which use more specific implementation details. One of the configuration Lua files typically extends another by using the Lua <code class="docutils literal"><span class="pre">require</span></code> statement and Lua&#8217;s table inheritance.</p>
 <p>The graph below shows the organizational hierarchy for the OCO configuration:</p>
-<p class="graphviz">
-<img src="_images/graphviz-c81bdd20a77bcd6b59184f729947cc0efe9925b9.png" alt="digraph file_hierarchy {
+<img src="_images/graphviz-013dc120ec2717f24c5d87824f24b7a318cb3a3d.png" alt="digraph file_hierarchy {
     rankdir=BT;
     config_common [label = &quot;config_common.lua&quot;, style=filled, fillcolor=bisque];
     oco_config [label = &quot;oco_config.lua&quot;, style=filled, fillcolor=gold];
@@ -80,7 +81,6 @@
     config [label = &quot;config.lua&quot;, style=filled, fillcolor=gold];
     config -&gt; oco_base -&gt; oco_config -&gt; config_common;
 }" />
-</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
@@ -107,8 +107,7 @@
 <p>As the table above states, <code class="docutils literal"><span class="pre">config_common.lua</span></code> is collection of common routines that are not instrument specific. It defines <code class="docutils literal"><span class="pre">ConfigCommon</span></code>, a table object which contains the configuration and also serves as a name space. The most important method is <code class="docutils literal"><span class="pre">do_config</span></code>. It is called from the lowest level configuration file to begin the process of instantiating objects.</p>
 <p>The framework objects are created through Lua <code class="docutils literal"><span class="pre">Creator</span></code> classes. These classes define how a particular functionality is instantiated. They also provide an initial guess value, objects to be added to the state vector and objects to be registered into the output file. The <code class="docutils literal"><span class="pre">Creator</span></code> class also handles calling any other <code class="docutils literal"><span class="pre">Creator</span></code> objects that it depends on.</p>
 <p>The hierarchy of <code class="docutils literal"><span class="pre">Creator</span></code> objects forms a tree which at the top is the one <code class="docutils literal"><span class="pre">Creator</span></code> that <code class="docutils literal"><span class="pre">do_config</span></code> knows about directly, the <code class="docutils literal"><span class="pre">fm</span></code> creator. All other <code class="docutils literal"><span class="pre">Creator</span></code> objects are dependencies of this one or other <code class="docutils literal"><span class="pre">Creator</span></code> objects. The graph below shows the organization of the <code class="docutils literal"><span class="pre">Creator</span></code> objects in the current OCO configuration.</p>
-<p class="graphviz">
-<img src="_images/graphviz-7757b46c280c7a8d9dbb927d33ea564c7b1a5770.png" alt="graph config_hierarchy {
+<img src="_images/graphviz-4348da7995189035a6cd8081e3c0bccf68253148.png" alt="graph config_hierarchy {
     fm -- common;
     fm -- spec_win;
     fm -- spec_samp;
@@ -145,7 +144,6 @@
     solar_model -- solar_continuum;
 
 }" />
-</p>
 </div>
 <div class="section" id="base-config">
 <h2>Base Config<a class="headerlink" href="#base-config" title="Permalink to this headline">¶</a></h2>
@@ -401,7 +399,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.6
+      1.4.8
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

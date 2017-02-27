@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Compilation &mdash; RT Retrieval Framework  documentation</title>
+    <title>Compilation &#8212; RT Retrieval Framework  documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
     <link rel="next" title="Testing" href="testing.html" />
     <link rel="prev" title="System Configuraiton" href="system_configuration.html" />
@@ -67,19 +69,21 @@
 <p>There is some third party software included with the source code that need compiling along with our code. To build the framework&#8217;s code along with the third party software, execute the following:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir build_optimized
 <span class="gp">$</span> <span class="nb">cd</span> build_optimized
-<span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build
+<span class="gp">$</span> /your/path/to/rtr_framework/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build
 <span class="gp">$</span> make all
 </pre></div>
 </div>
-<p>In the above replace <code class="docutils literal"><span class="pre">/path/to/source</span></code> with the location where you downloaded the software during the <a class="reference internal" href="setup.html"><em>Setup</em></a> instructions.</p>
+<p>In the above replace <code class="docutils literal"><span class="pre">/your/path/to/rtr_framework</span></code> with the location where you downloaded the software during the <a class="reference internal" href="setup.html"><span class="doc">Setup</span></a> instructions.</p>
 <p>The <code class="docutils literal"><span class="pre">configure</span></code> command creates the Makefile to use. You only need to run this when you are creating a new build directory, after that you can just rerun <code class="docutils literal"><span class="pre">make</span> <span class="pre">all</span></code> to get any software updates. Configure will check a bunch of things on the system, and in the end print a report something like:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Level 2 Full Physics is now configured</span>
 
-<span class="go"> Installation directory:       /path/to/build_optimized/install</span>
+<span class="go"> Installation directory:       /your/path/to/build_optimized/install</span>
 <span class="go"> Build debug version:          no</span>
 <span class="go"> Fortran compiler type:        ifort</span>
-<span class="go"> Fortran compiler:             ifort -g -xSSE2 -O3 -Difort -heap-arrays 1024</span>
+<span class="go"> Fortran compiler:             /opt/local/depot/intel/11.1/064/bin/intel64/ifort -g -xSSE2 -O3 -Difort -heap-arrays 1024</span>
 <span class="go"> C compiler:                   gcc -g -O2</span>
+<span class="go"> LD Flags:                      -R /opt/local/depot/intel/11.1/064/lib/intel64:/opt/local/depot/intel/11.1/064/mkl/lib/em64t:/opt/local/depot/intel/11.1/064/lib/intel64:/opt/local/depot/intel/11.1/064/mkl/lib/em64t</span>
+
 <span class="go"> HDF5 support:                 yes</span>
 <span class="go"> Build own HDF5 library:       yes</span>
 <span class="go"> Build own LIDORT library:     yes</span>
@@ -94,12 +98,12 @@
 <p>For serious development it is recommended to compile the third party software once and then refer to it in subsequent builds:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir build_third_party
 <span class="gp">$</span> <span class="nb">cd</span> build_third_party
-<span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build --prefix<span class="o">=</span>/path/for/third_party
+<span class="gp">$</span> /your/path/to/rtr_framework/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build --prefix<span class="o">=</span>/install/path/for/third_party
 <span class="gp">$</span> make thirdparty
 </pre></div>
 </div>
 <p>Now subsequent builds can use this directory instead of recompiling the third party packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /path/to/source/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>/install/path/for/third_party
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /your/path/to/rtr_framework/configure <span class="nv">THIRDPARTY</span><span class="o">=</span>/install/path/for/third_party
 <span class="gp">$</span> make all
 </pre></div>
 </div>
@@ -160,9 +164,8 @@
 </div>
 <div class="section" id="debugging">
 <h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
-<p>It has been discovered that gfortran works better with valgrind and debugging (although our &#8220;official&#8221; builds use ifort). The default gfortran on many systems is often too old, we use Fortran 2003 features that were not available until GCC version 4.5. To use a different gfortran version, you can use the following configure command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /path/to/source/configure <span class="nv">FC</span><span class="o">=</span>gfortran-4.5 <span class="nv">CC</span><span class="o">=</span>gcc-4.5 <span class="nv">CXX</span><span class="o">=</span>g++-4.5 <span class="se">\</span>
-<span class="go">    --enable-debug &lt;other config options&gt;</span>
+<p>It has been discovered that gfortran works better with valgrind and debugging (although our &#8220;official&#8221; builds use ifort). Therefore if you need to use valgrind or gdb and have ifort installed in your path, you will need to directly specify the Fortran compiler as gfortran when creating debug builds:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /path/to/level_2/configure <span class="nv">FC</span><span class="o">=</span>gfortran --enable-debug &lt;other config options&gt;
 </pre></div>
 </div>
 </div>
@@ -236,7 +239,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.6
+      1.4.8
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

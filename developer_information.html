@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Developer’s Information &mdash; RT Retrieval Framework  documentation</title>
+    <title>Developer’s Information &#8212; RT Retrieval Framework  documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
     <link rel="next" title="Other Documentation" href="other_documentation.html" />
     <link rel="prev" title="Python Wrappers" href="python_wrappers.html" />
@@ -67,7 +69,7 @@
 </div>
 <div class="section" id="build-system">
 <h2>Build System<a class="headerlink" href="#build-system" title="Permalink to this headline">¶</a></h2>
-<p>We use the same build system used by many open source projects, the standard &#8220;configure/make&#8221; cycle used to build many linux packages. The details of actually building the software is covered in the <a class="reference internal" href="compilation.html"><em>compilation section</em></a>.</p>
+<p>We use the same build system used by many open source projects, the standard &#8220;configure/make&#8221; cycle used to build many linux packages. The details of actually building the software is covered in the <a class="reference internal" href="compilation.html"><span class="doc">compilation section</span></a>.</p>
 <p>We&#8217;ll give a little more detail in this section on using the build system from a developer&#8217;s point of view, e.g, &#8220;how do I add a file?&#8221;.</p>
 <div class="section" id="autotools">
 <h3>Autotools<a class="headerlink" href="#autotools" title="Permalink to this headline">¶</a></h3>
@@ -202,24 +204,24 @@
 </ol>
 <p>The registration code is cookie cutter, so we have macros to help do this. The registration is different depending on if we have a derived class with a base class, or a class that doesn&#8217;t derive from another (or at least one that we want to tell Lua about).</p>
 <p>An example of this in level_1b.cc:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>#ifdef HAVE_LUA
-   #include &quot;register_lua.h&quot;
-   REGISTER_LUA_CLASS(Level1b)
-   REGISTER_LUA_END()
-#endif
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#ifdef HAVE_LUA</span>
+   <span class="c1">#include &quot;register_lua.h&quot;</span>
+   <span class="n">REGISTER_LUA_CLASS</span><span class="p">(</span><span class="n">Level1b</span><span class="p">)</span>
+   <span class="n">REGISTER_LUA_END</span><span class="p">()</span>
+<span class="c1">#endif</span>
 </pre></div>
 </div>
 <p>In level_1b_hdf.cc:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>#ifdef HAVE_LUA
-   #include &quot;register_lua.h&quot;
-   REGISTER_LUA_DERIVED_CLASS(Level1bAcos, Level1b)
-     .def(luabind::constructor&lt;std::string, std::string&gt;())
-   REGISTER_LUA_END()
-#endif
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#ifdef HAVE_LUA</span>
+   <span class="c1">#include &quot;register_lua.h&quot;</span>
+   <span class="n">REGISTER_LUA_DERIVED_CLASS</span><span class="p">(</span><span class="n">Level1bAcos</span><span class="p">,</span> <span class="n">Level1b</span><span class="p">)</span>
+     <span class="o">.</span><span class="n">def</span><span class="p">(</span><span class="n">luabind</span><span class="p">::</span><span class="n">constructor</span><span class="o">&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">())</span>
+   <span class="n">REGISTER_LUA_END</span><span class="p">()</span>
+<span class="c1">#endif</span>
 </pre></div>
 </div>
 <p>Then in register_lua.cc, we add:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">REGISTER_LUA_LIST</span><span class="p">(</span><span class="n">Level1b</span><span class="p">);</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">REGISTER_LUA_LIST</span><span class="p">(</span><span class="n">Level1b</span><span class="p">);</span>
 <span class="n">REGISTER_LUA_LIST</span><span class="p">(</span><span class="n">Level1Hdf</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -227,12 +229,12 @@
 <p>Pretty much all our classes are Printable. We&#8217;ve put the magic incantation in place for classes in the macros (this ties the Lua
 function __tostring__ to the C++ code print_to_string). If you have a class that is not printable, we&#8217;ll need to add a macro to support that.</p>
 <p>We normally use Lua through our C++ code. It can be useful, particularly when testing, to go the other way. We define the function &#8220;luaopen_fullphysics&#8221; to go the other way, call in Lua like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="s2">&quot;libfull_physics&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="s2">&quot;libfull_physics&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Note that you should use the installed library, like we do with python (i.e., do a &#8220;make install&#8221;).</p>
 <p>You will need to make sure that the library is on the PATH. Lua uses an odd syntax for its path, an example of using it would be:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>LUA_CPATH=install/lib/?.so lua
+<div class="highlight-default"><div class="highlight"><pre><span></span>LUA_CPATH=install/lib/?.so lua
 require &quot;libfull_physics&quot;
 l1b = Level1bAcos(&quot;filename&quot;,&quot;soundingid&quot;)
 </pre></div>
@@ -350,7 +352,7 @@ l1b = Level1bAcos(&quot;filename&quot;,&quot;soundingid&quot;)
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.6
+      1.4.8
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

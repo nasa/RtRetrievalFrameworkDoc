@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>System Configuraiton &mdash; RT Retrieval Framework  documentation</title>
+    <title>System Configuraiton &#8212; RT Retrieval Framework  documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="RT Retrieval Framework  documentation" href="index.html" />
     <link rel="next" title="Compilation" href="compilation.html" />
     <link rel="prev" title="Setup" href="setup.html" />
@@ -81,61 +83,26 @@
 <li><a class="reference external" href="http://pypi.python.org/pypi/pyephem/">pyephem</a></li>
 </ul>
 </div>
-<div class="section" id="fortran-compilers">
-<h2>Fortran Compilers<a class="headerlink" href="#fortran-compilers" title="Permalink to this headline">¶</a></h2>
-<p>One of the following Fortran compilers is required for compiling:</p>
+<div class="section" id="compilers-versions">
+<h2>Compilers Versions<a class="headerlink" href="#compilers-versions" title="Permalink to this headline">¶</a></h2>
+<p>One of the following combinations of compilers is needed:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://gcc.gnu.org/fortran/">GNU Fortran</a> &#8211; 4.5 or greater</li>
-<li><a class="reference external" href="http://software.intel.com/en-us/intel-compilers/">Intel Fortran Compiler</a>  &#8211; 11.1 or newer</li>
+<li><a class="reference external" href="https://gcc.gnu.org/">GCC</a> and <a class="reference external" href="http://gcc.gnu.org/fortran/">GNU Fortran</a> at version 4.6 or greater</li>
+<li>GCC 4.6 or greater and <a class="reference external" href="http://software.intel.com/en-us/intel-compilers/">Intel Fortran Compiler</a>  11.1 or newer</li>
 </ul>
+<p>clang might work, but it has not been tested.</p>
 </div>
 <div class="section" id="linux-system-setup">
 <h2>Linux System Setup<a class="headerlink" href="#linux-system-setup" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="gentoo-deployment-steps">
-<h3>Gentoo Deployment Steps<a class="headerlink" href="#gentoo-deployment-steps" title="Permalink to this headline">¶</a></h3>
-<p>Install gdb if you would like to use that, it is not installed by default:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av gdb
-</pre></div>
-</div>
-<p>If you do not already have Subversion installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av subversion
-</pre></div>
-</div>
-<p>Install scripting languages and required supporting packages needed by the build process:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av ruby rubygems
-</pre></div>
-</div>
-<p>The Ruby narray package is also required, but may only be available in the Gentoo testing branch. If you have not enabled testing for your architecture you would have to do the follow (if your architecture is amd64):</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s1">&#39;ACCEPT_KEYWORDS=&quot;~amd64&quot;&#39;</span> &gt; /etc/make.conf
-<span class="gp">$</span> emerge -av narray
-</pre></div>
-</div>
-<p>We also require the installation of Python but by default Gentoo satisfies that through the eselect-python package. Note that emerging the dev-lang/python will install Python 3.x which is not yet used by our software.</p>
-<p>Install Python packages for support utils:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> emerge -av numpy
-<span class="gp">$</span> emerge -av h5py
-<span class="gp">$</span> emerge -av ply
-</pre></div>
-</div>
-<p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
-<p>Compile according to <a class="reference internal" href="compilation.html"><em>Compilation</em></a> instructions for a Non JPL Build.</p>
-</div>
 <div class="section" id="fedora-centos-deployment-steps">
 <h3>Fedora/CentOS Deployment Steps<a class="headerlink" href="#fedora-centos-deployment-steps" title="Permalink to this headline">¶</a></h3>
-<p>Under CentOS you may need to update to a newer version of gcc/gfortran. CentoOS is conservative with GCC updates and keep newer versions in separate packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install gcc44 gcc44-gfortran gcc44-c++
-</pre></div>
-</div>
-<p>Fedora has the latest GCC in the default packages:</p>
+<p>Under RHEL/CentOS you may need to update to a newer version of gcc/gfortran. If you are using RHEL/CentoOS 6 then you need to follow the <a class="reference external" href="https://gist.github.com/stephenturner/e3bc5cfacc2dc67eca8b">following instructions</a> to get gcc 4.8.</p>
+<p>However if you are using RHEL/CentOS 7 or Fedora the default system packages have suitable versions of gcc:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install gcc gcc-gfortran gcc-c++
 </pre></div>
 </div>
 <p>A Fedora minimal system will also need the following:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install make automake patch zlib-devel bzip2-devel
-</pre></div>
-</div>
-<p>If you do not already have Subversion installed:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install subversion
 </pre></div>
 </div>
 <p>Install scripting languages needed by build process:</p>
@@ -150,7 +117,7 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum install rubygems
 </pre></div>
 </div>
-<p>For CentOS (also possibly Redhat) install rubygems from source. Get the latest package from the <a class="reference external" href="http://rubygems.org/pages/download">RubyGems.org</a> website then install:</p>
+<p>For RHEL/CentOS 6 install rubygems from source. Get the latest package from the <a class="reference external" href="http://rubygems.org/pages/download">RubyGems.org</a> website then install:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> tar zfvx rubygems-X.X.X.tgz
 <span class="gp">$</span> <span class="nb">cd</span> rubygems-X.X.X
 <span class="gp">$</span> ruby setup.rb
@@ -165,8 +132,8 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gem install narray
 </pre></div>
 </div>
-<p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
-<p>Compile according to <a class="reference internal" href="compilation.html"><em>Compilation</em></a> instructions for a Non JPL Build.</p>
+<p>Follow <a class="reference internal" href="setup.html"><span class="doc">Setup</span></a> steps.</p>
+<p>Compile according to <a class="reference internal" href="compilation.html"><span class="doc">Compilation</span></a> instructions for a Non JPL Build.</p>
 </div>
 <div class="section" id="ubuntu-debian-deployment-steps">
 <h3>Ubuntu/Debian Deployment Steps<a class="headerlink" href="#ubuntu-debian-deployment-steps" title="Permalink to this headline">¶</a></h3>
@@ -198,8 +165,8 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install python-ply python-h5py
 </pre></div>
 </div>
-<p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
-<p>Compile according to <a class="reference internal" href="compilation.html"><em>Compilation</em></a> instructions for a Non JPL Build.</p>
+<p>Follow <a class="reference internal" href="setup.html"><span class="doc">Setup</span></a> steps.</p>
+<p>Compile according to <a class="reference internal" href="compilation.html"><span class="doc">Compilation</span></a> instructions for a Non JPL Build.</p>
 </div>
 <div class="section" id="opensuse-deployment-steps">
 <h3>OpenSuSE Deployment Steps<a class="headerlink" href="#opensuse-deployment-steps" title="Permalink to this headline">¶</a></h3>
@@ -223,81 +190,33 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> zypper install zlib-devel libbz2-devel
 </pre></div>
 </div>
-<p>Follow <a class="reference internal" href="setup.html"><em>Setup</em></a> steps.</p>
-<p>Compile according to <a class="reference internal" href="compilation.html"><em>Compilation</em></a> instructions for a Non JPL Build.</p>
+<p>Follow <a class="reference internal" href="setup.html"><span class="doc">Setup</span></a> steps.</p>
+<p>Compile according to <a class="reference internal" href="compilation.html"><span class="doc">Compilation</span></a> instructions for a Non JPL Build.</p>
 </div>
 </div>
 <div class="section" id="os-x-system-setup">
 <h2>OS X System Setup<a class="headerlink" href="#os-x-system-setup" title="Permalink to this headline">¶</a></h2>
 <p>The following instructions are intended for those attempting to deploy on a Mac OS X system.</p>
-<div class="section" id="select-macport-or-fink">
-<h3>Select MacPort or Fink<a class="headerlink" href="#select-macport-or-fink" title="Permalink to this headline">¶</a></h3>
-<p>Additional tools are needed on the Mac to build. There are two different projects that supply these tools, Macport and Fink. The two projects are similar, it is a matter of preference which one you select. If you don&#8217;t otherwise care, then use MacPort, it is what was used during development.</p>
-</div>
 <div class="section" id="macport">
 <h3>MacPort<a class="headerlink" href="#macport" title="Permalink to this headline">¶</a></h3>
-<p>If you select MacPort, then follow the directions in this section.</p>
+<p>The standard GCC compiler is needed, using the Xcode compiler will not work as since they have switched to clang. Additionally, the software needs to be linked to the GNU version of glib. Although there are alternatives, we suggest you use MacPorts to obtain the necessary compiler tools. They have a page with more details on <a class="reference external" href="https://trac.macports.org/wiki/UsingTheRightCompiler">selecting compiler versions</a>.</p>
 <div class="section" id="install-macport">
 <h4>Install MacPort<a class="headerlink" href="#install-macport" title="Permalink to this headline">¶</a></h4>
-<p>Look at <a class="reference external" href="http://www.macports.org/install.php">http://www.macports.org/install.php</a> for directions on installing macport.</p>
+<p>See the <a class="reference external" href="http://www.macports.org/install.php">MacPorts install page</a> for directions on installing.</p>
 </div>
 <div class="section" id="install-packages">
 <h4>Install Packages<a class="headerlink" href="#install-packages" title="Permalink to this headline">¶</a></h4>
 <p>Install packages using port:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo port install gcc44 python27 py27-ipython hdf5-18 boost gsl
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo port install glib2 gcc48 python34 hdf5 boost gsl
 </pre></div>
 </div>
-</div>
-<div class="section" id="configuration">
-<h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h4>
-<p>The configuration is slightly tricky, if you want to have python working. The issue is that you need to use the same version of gcc and g+ used to create python, while at the same time using a different version of gfortran. The configuration used in development is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> .../configure <span class="se">\</span>
-<span class="go">    FCLIBS=&quot;/opt/local/lib/gcc44/gcc/x86_64-apple-darwin10/4.4.5/libgfortranbegin.a \</span>
-<span class="go">    /opt/local/lib/gcc44/libgfortran.dylib&quot; \</span>
-<span class="go">    FC=/opt/local/bin/gfortran-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \</span>
-<span class="go">    --with-python-swig --with-lidort=build --with-cppad=build --with-blitz=build</span>
+<p>Select the installed packages to be used instead of the system packages:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo port <span class="k">select</span> --set gcc mp-gcc48
+<span class="gp">$</span> sudo port <span class="k">select</span> --set python python34
 </pre></div>
 </div>
-<p>Note the &#8220;FCLIBS&#8221; - this is required. This works around splitting between different versions for g+ and gfortran. Without this, the python library will use the libstdc+ coming from g+-4.4, not the system one. This results in fairly obscure memory errors when std::string from one version of g is passed to a library expecting a different version.</p>
-<p>Note that the strict requirement on the compiler is only needed for building the python wrappers. If you don&#8217;t care about the wrappers, you can leave off the FCLIBS and use the same version for gfortran and for g+ and gcc. For nonpython development, the configuration we used is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> .../configure <span class="nv">THIRDPARTY</span><span class="o">=</span>build <span class="nv">FC</span><span class="o">=</span>/opt/local/bin/gfortran-mp-4.4 <span class="se">\</span>
-<span class="go">    CXX=/opt/local/bin/g++-mp-4.4 \</span>
-<span class="go">    CC=/opt/local/bin/gcc-mp-4.4 F77=/opt/local/bin/gfortran-mp-4.4 \</span>
-<span class="go">    --enable-debug --enable-maintainer-mode</span>
-</pre></div>
-</div>
-<p>In this case, we build all the thirdparty libraries rather than using the system versions, this is needed so that a consistent compiler is used for things link HDF5 and BOOST.</p>
-</div>
-</div>
-<div class="section" id="fink">
-<h3>Fink<a class="headerlink" href="#fink" title="Permalink to this headline">¶</a></h3>
-<p>If you select Fink, then follow the directions in this section.</p>
-<div class="section" id="upgrade-xcode">
-<h4>Upgrade Xcode<a class="headerlink" href="#upgrade-xcode" title="Permalink to this headline">¶</a></h4>
-<p>Upgrade to Xcode 3.1.x for 10.5, 3.2.x for 10.6 from Apple Developers Connection. Go to the <a class="reference external" href="http://connect.apple.com/">Developer Connection</a> member site then select downloads to find the desired Xcode version.</p>
-<p>Xcode needs to be upgraded so that Fink dependencies can be meet otherwise an error like this will show up:
-&#8220;xcode (&gt;= 3.1.2)&#8221; for package &#8220;gcc44-4.4.1-1000&#8221;</p>
-</div>
-<div class="section" id="install-fink">
-<h4>Install Fink<a class="headerlink" href="#install-fink" title="Permalink to this headline">¶</a></h4>
-<p><a class="reference external" href="http://www.finkproject.org/download/">Download Fink</a> and follow instructions: <a class="reference external" href="http://www.finkproject.org/download/index.php?phpLang=en">http://www.finkproject.org/download/index.php?phpLang=en</a></p>
-</div>
-<div class="section" id="enable-fink-unstable">
-<h4>Enable Fink Unstable<a class="headerlink" href="#enable-fink-unstable" title="Permalink to this headline">¶</a></h4>
-<p>Enable fink unstable packages according to these instructions: <a class="reference external" href="http://www.finkproject.org/faq/usage-fink.php?phpLang=en#unstable">http://www.finkproject.org/faq/usage-fink.php?phpLang=en#unstable</a></p>
-</div>
-<div class="section" id="install-fink-packages">
-<h4>Install Fink Packages<a class="headerlink" href="#install-fink-packages" title="Permalink to this headline">¶</a></h4>
-<p>Install free Fortran compilers:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> fink install g77 g95
-</pre></div>
-</div>
-<p>Install Python packages:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> fink install python27 numpy-py27 h5py-py27 matplotlib-py27 scipy-py27 ipython-py27
-</pre></div>
-</div>
-<p>Since we are using the Fink unstable repository everything comes from source and the compilation which includes many dependencies can takes a fair amount of time.</p>
-<p>As a consequence of the dependencies of the above packages the latest GCC is installed and hence gfortran will also be available.</p>
+<p>Follow <a class="reference internal" href="setup.html"><span class="doc">Setup</span></a> steps.</p>
+<p>Compile according to <a class="reference internal" href="compilation.html"><span class="doc">Compilation</span></a> instructions for a Non JPL Build.</p>
 </div>
 </div>
 </div>
@@ -314,27 +233,17 @@
 <li><a class="reference internal" href="#">System Configuraiton</a><ul>
 <li><a class="reference internal" href="#memory-requirements">Memory Requirements</a></li>
 <li><a class="reference internal" href="#python-requirements">Python Requirements</a></li>
-<li><a class="reference internal" href="#fortran-compilers">Fortran Compilers</a></li>
+<li><a class="reference internal" href="#compilers-versions">Compilers Versions</a></li>
 <li><a class="reference internal" href="#linux-system-setup">Linux System Setup</a><ul>
-<li><a class="reference internal" href="#gentoo-deployment-steps">Gentoo Deployment Steps</a></li>
 <li><a class="reference internal" href="#fedora-centos-deployment-steps">Fedora/CentOS Deployment Steps</a></li>
 <li><a class="reference internal" href="#ubuntu-debian-deployment-steps">Ubuntu/Debian Deployment Steps</a></li>
 <li><a class="reference internal" href="#opensuse-deployment-steps">OpenSuSE Deployment Steps</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#os-x-system-setup">OS X System Setup</a><ul>
-<li><a class="reference internal" href="#select-macport-or-fink">Select MacPort or Fink</a></li>
 <li><a class="reference internal" href="#macport">MacPort</a><ul>
 <li><a class="reference internal" href="#install-macport">Install MacPort</a></li>
 <li><a class="reference internal" href="#install-packages">Install Packages</a></li>
-<li><a class="reference internal" href="#configuration">Configuration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#fink">Fink</a><ul>
-<li><a class="reference internal" href="#upgrade-xcode">Upgrade Xcode</a></li>
-<li><a class="reference internal" href="#install-fink">Install Fink</a></li>
-<li><a class="reference internal" href="#enable-fink-unstable">Enable Fink Unstable</a></li>
-<li><a class="reference internal" href="#install-fink-packages">Install Fink Packages</a></li>
 </ul>
 </li>
 </ul>
@@ -388,7 +297,7 @@
   </div>
   <footer id="pagefooter">&copy; Copyright 2016 California Institute of Technology. U.S. Government sponsorship acknowledged.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.6
+      1.4.8
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 
