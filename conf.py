@@ -14,10 +14,8 @@ sys.path.append(os.path.abspath('sphinxext'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = [ 'sphinx.ext.pngmath', 
-               'sphinx.ext.mathjax',
+extensions = [ 'sphinx.ext.mathjax',
                'sphinx.ext.graphviz',
-               'rst2pdf.pdfbuilder', # requires rst2pdf to be installed
                'ipython_console_highlighting']
 
 # Add any paths that contain templates here, relative to this directory.

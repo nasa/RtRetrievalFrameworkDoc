@@ -93,9 +93,9 @@ THIRDPARTY=<dir>         Search in <dir> in addition to the normal locations for
 Debugging
 =========
 
-It has been discovered that gfortran works better with valgrind and debugging (although our "official" builds use ifort). The default gfortran on many systems is often too old, we use Fortran 2003 features that were not available until GCC version 4.5. To use a different gfortran version, you can use the following configure command::
+It has been discovered that gfortran works better with valgrind and debugging (although our "official" builds use ifort). Therefore if you need to use valgrind or gdb and have ifort installed in your path, you will need to directly specify the Fortran compiler as gfortran when creating debug builds::
 
-    $ /path/to/level_2/configure FC=gfortran-4.5 CC=gcc-4.5 CXX=g++-4.5 --enable-debug <other config options>
+    $ /path/to/level_2/configure FC=gfortran --enable-debug <other config options>
 
 Developer Information
 =====================
