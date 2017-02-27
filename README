@@ -1,0 +1,15 @@
+====================================
+RT Retrieval Framework Documentation
+====================================
+
+Jet Propulsion Laboratory, California Institute of Technology. 
+Copyright 2016 California Institute of Technology. 
+U.S. Government sponsorship acknowledged.
+
+This is the Sphinx source for the RT Retrieval Framework documentation.
+
+The software is located at:
+https://github.com/nasa/RtRetrievalFramework
+
+This documentation rendered into HTML for is available at:
+http://nasa.github.io/RtRetrievalFrameworkDoc/

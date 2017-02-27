@@ -13,7 +13,7 @@ The `public copy <https://github.com/nasa/RtRetrievalFramework>`_ of the source 
 
 :: 
 
-    $ git clone https://github.com/nasa/RtRetrievalFramework.git rtr_framework
+    $ git clone https://github.com/nasa/RtRetrievalFramework.git 
 
 This is a clone of the development repository used at JPL. On a regular basis we push our changes to the public repository from JPL.
 
@@ -24,7 +24,7 @@ The downloaded directory contains a bash script that will include into your shel
 
 Add the following to your .bashrc or wherever you place these things for yourself::
 
-    $ source /path/to/rtr_framework/setup_env.sh
+    $ source /path/to/source/setup_env.sh
 
 This script is used when working on code developing. On the :doc:`compilation` page it will be discussed how to use the software as an installed program.
 

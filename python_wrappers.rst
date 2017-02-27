@@ -17,7 +17,7 @@ The Python bindings are not built by default, you need to explicitly request tha
 
 .. code-block:: console
 
-    $ /path/to/rtr_framework/configure --with-python-swig
+    $ /path/to/source/configure --with-python-swig
 
 You need to do a full install, not just a ``make all``. This is because Python needs to see the libraries in a particular directory structure that gets created with the install. So you would build with:
 
@@ -52,7 +52,7 @@ The easiest way to get started is by using a pre-existing Lua configuration:
 
     In [1]: from full_physics import *
     In [2]: from matplotlib.pylab import *
-    In [3]: conf = L2FpConfigurationLua('/path/to/preexisting_run/config.lua')
+    In [3]: conf = L2FpConfigurationLua('/path/to/existing_run/config.lua')
 
 **Add some information about getting the right enviromental variables made available.**
 
@@ -107,7 +107,8 @@ Run just the radiative transfer w/o applying solar or instrument model::
     In [11]: band = 0
     In [12]: ils_hw = conf.forward_model.instrument.ils_half_width(band)
     In [13]: spec_pix = conf.forward_model.instrument.pixel_spectral_domain(band)
-    In [14]: spec_samp = conf.forward_model.spectrum_sampling.spectral_domain(band, spec_pix, ils_hw)
+    In [14]: spec_samp = \
+        conf.forward_model.spectrum_sampling.spectral_domain(band, spec_pix, ils_hw)
     In [15]: rrt = conf.forward_model.radiative_transfer.reflectance(spec_samp, band, True)
     In [16]: plot(rrt.spectral_domain.data, rrt.spectral_range.data)
 
